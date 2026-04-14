@@ -1,43 +1,32 @@
 "use client";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { config } from "@/lib/wagmi";
-import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
-import "@rainbow-me/rainbowkit/styles.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
-import { WagmiProvider } from "wagmi";
+import dynamic from "next/dynamic";
+import type { ReactNode } from "react";
 
-const queryClient = new QueryClient();
+const WalletProviders = dynamic(
+  () => import("./wallet-providers").then((m) => m.WalletProviders),
+  { ssr: false }
+);
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({ children }: { children: ReactNode }) {
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider
-          theme={darkTheme({
-            accentColor: "#10b981",
-            accentColorForeground: "white",
-            borderRadius: "medium",
-            overlayBlur: "small",
-          })}
-        >
-          <TooltipProvider>
-            {children}
-            <Toaster
-              theme="dark"
-              position="bottom-right"
-              toastOptions={{
-                style: {
-                  background: "rgba(25, 31, 49, 0.9)",
-                  border: "1px solid rgba(78, 222, 163, 0.2)",
-                  color: "#dce1fb",
-                },
-              }}
-            />
-          </TooltipProvider>
-        </RainbowKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+    <TooltipProvider>
+      <WalletProviders>
+        {children}
+      </WalletProviders>
+      <Toaster
+        theme="dark"
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            background: "rgba(25, 31, 49, 0.9)",
+            border: "1px solid rgba(78, 222, 163, 0.2)",
+            color: "#dce1fb",
+          },
+        }}
+      />
+    </TooltipProvider>
   );
 }
