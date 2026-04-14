@@ -1,13 +1,16 @@
-'use client';
+"use client";
 
-import { useMatchCount, useMatch, useTicketCategory, useTokenIdCounter, useBuyTicket } from '@/hooks/useTickets';
-import { formatWire } from '@/lib/utils';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Button } from '@/components/ui/button';
-import { useReadContract } from 'wagmi';
-import { CONTRACTS } from '@/lib/contracts';
-import { useState } from 'react';
-import { BuyTicketModal } from './BuyTicketModal';
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  useMatch,
+  useMatchCount,
+  useTicketCategory,
+  useTokenIdCounter,
+} from "@/hooks/useTickets";
+import { formatWire } from "@/lib/utils";
+import { useState } from "react";
+import { BuyTicketModal } from "./BuyTicketModal";
 
 function MatchCard({ matchId }: { matchId: number }) {
   const { match, isLoading } = useMatch(matchId);
@@ -29,26 +32,37 @@ function MatchCard({ matchId }: { matchId: number }) {
           <p className="text-[10px] font-mono uppercase tracking-widest text-[#F59E0B] mb-1">
             Match #{matchId}
           </p>
-          <h3 className="font-heading text-xl font-bold text-[#dce1fb]">{match.name}</h3>
+          <h3 className="font-heading text-xl font-bold text-[#dce1fb]">
+            {match.name}
+          </h3>
           <p className="text-xs text-[#86948a] mt-1">
-            {new Date(Number(match.date) * 1000).toLocaleDateString('en-US', {
-              weekday: 'long',
-              month: 'long',
-              day: 'numeric',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
+            {new Date(Number(match.date) * 1000).toLocaleDateString("en-US", {
+              weekday: "long",
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
             })}
           </p>
         </div>
 
         <div className="p-4 space-y-2">
-          <p className="text-xs font-mono uppercase tracking-widest text-[#86948a] mb-3">Ticket Categories</p>
+          <p className="text-xs font-mono uppercase tracking-widest text-[#86948a] mb-3">
+            Ticket Categories
+          </p>
           {Array.from({ length: totalTokens }).map((_, i) => (
-            <CategoryRow key={i + 1} tokenId={i + 1} matchId={matchId} onBuy={() => setSelectedTokenId(i + 1)} />
+            <CategoryRow
+              key={i + 1}
+              tokenId={i + 1}
+              matchId={matchId}
+              onBuy={() => setSelectedTokenId(i + 1)}
+            />
           ))}
           {totalTokens === 0 && (
-            <p className="text-sm text-[#86948a] py-2">No ticket categories available.</p>
+            <p className="text-sm text-[#86948a] py-2">
+              No ticket categories available.
+            </p>
           )}
         </div>
       </div>
@@ -64,23 +78,39 @@ function MatchCard({ matchId }: { matchId: number }) {
   );
 }
 
-function CategoryRow({ tokenId, matchId, onBuy }: { tokenId: number; matchId: number; onBuy: () => void }) {
+function CategoryRow({
+  tokenId,
+  matchId,
+  onBuy,
+}: {
+  tokenId: number;
+  matchId: number;
+  onBuy: () => void;
+}) {
   const { category } = useTicketCategory(tokenId);
 
   if (!category || Number(category.matchId) !== matchId) return null;
 
   const soldOut = Number(category.sold) >= Number(category.totalSupply);
   const remaining = Number(category.totalSupply) - Number(category.sold);
-  const progressPct = (Number(category.sold) / Number(category.totalSupply)) * 100;
+  const progressPct =
+    (Number(category.sold) / Number(category.totalSupply)) * 100;
 
   return (
     <div className="flex items-center justify-between p-3 rounded-lg bg-[#0c1324]/50">
       <div className="flex-1">
-        <p className="text-sm font-medium text-[#dce1fb]">{category.categoryName}</p>
+        <p className="text-sm font-medium text-[#dce1fb]">
+          {category.categoryName}
+        </p>
         <div className="flex items-center gap-3 mt-1">
-          <span className="font-mono text-xs text-[#4edea3]">{formatWire(category.price)}</span>
+          <span className="font-mono text-xs text-[#4edea3]">
+            {formatWire(category.price)}
+          </span>
           <div className="h-1 flex-1 max-w-[80px] bg-[#191f31] rounded-full overflow-hidden">
-            <div className="h-full bg-[#4edea3] rounded-full" style={{ width: `${progressPct}%` }} />
+            <div
+              className="h-full bg-[#4edea3] rounded-full"
+              style={{ width: `${progressPct}%` }}
+            />
           </div>
           <span className="text-[10px] text-[#86948a]">{remaining} left</span>
         </div>
@@ -89,12 +119,13 @@ function CategoryRow({ tokenId, matchId, onBuy }: { tokenId: number; matchId: nu
         size="sm"
         onClick={onBuy}
         disabled={soldOut}
-        className={soldOut
-          ? 'bg-[#191f31] text-[#86948a] cursor-not-allowed text-xs'
-          : 'primary-gradient text-white text-xs hover:shadow-[0_0_15px_rgba(16,185,129,0.4)]'
+        className={
+          soldOut
+            ? "bg-[#191f31] text-[#86948a] cursor-not-allowed text-xs"
+            : "primary-gradient text-white text-xs hover:shadow-[0_0_15px_rgba(16,185,129,0.4)]"
         }
       >
-        {soldOut ? 'Sold Out' : 'Buy'}
+        {soldOut ? "Sold Out" : "Buy"}
       </Button>
     </div>
   );
@@ -118,7 +149,9 @@ export function MatchesList() {
     return (
       <div className="text-center py-16">
         <p className="text-lg text-[#86948a]">No matches scheduled yet.</p>
-        <p className="text-sm text-[#86948a] mt-2">Check back soon for upcoming PSL matches.</p>
+        <p className="text-sm text-[#86948a] mt-2">
+          Check back soon for upcoming PSL matches.
+        </p>
       </div>
     );
   }

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { WalletGate } from '@/components/wallet/WalletGate';
-import { DashboardContent } from '@/components/dashboard/DashboardContent';
+import { DashboardContent } from "@/components/dashboard/DashboardContent";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { WalletGate } from "@/components/wallet/WalletGate";
 
 export default function DashboardPage() {
   return (

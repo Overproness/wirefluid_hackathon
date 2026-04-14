@@ -1,10 +1,9 @@
 'use client';
 
-import { useReadContract, useWriteContract, useWaitForTransactionReceipt, useAccount } from 'wagmi';
 import { CONTRACTS } from '@/lib/contracts';
-import { toast } from 'sonner';
 import { useEffect } from 'react';
-import { parseEther } from 'viem';
+import { toast } from 'sonner';
+import { useAccount, useReadContract, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 
 export function useMatchCount() {
   const { data, isLoading } = useReadContract({

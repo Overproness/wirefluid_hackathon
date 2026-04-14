@@ -1,11 +1,17 @@
-'use client';
+"use client";
 
-import { useCreatorSubmissions, useSubmission, useContentRevenue, useClaimable, useClaimRevenue } from '@/hooks/useContent';
-import { CONTENT_STATUSES } from '@/lib/constants';
-import { formatWire } from '@/lib/utils';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  useClaimable,
+  useClaimRevenue,
+  useContentRevenue,
+  useCreatorSubmissions,
+  useSubmission,
+} from "@/hooks/useContent";
+import { CONTENT_STATUSES } from "@/lib/constants";
+import { formatWire } from "@/lib/utils";
+import Link from "next/link";
 
 function CreatorContentRow({ contentId }: { contentId: number }) {
   const { submission, isLoading } = useSubmission(contentId);
@@ -18,9 +24,9 @@ function CreatorContentRow({ contentId }: { contentId: number }) {
   }
 
   const statusColors: Record<number, string> = {
-    0: 'bg-[#F59E0B]/20 text-[#F59E0B]',
-    1: 'bg-[#4edea3]/20 text-[#4edea3]',
-    2: 'bg-red-500/20 text-red-400',
+    0: "bg-[#F59E0B]/20 text-[#F59E0B]",
+    1: "bg-[#4edea3]/20 text-[#4edea3]",
+    2: "bg-red-500/20 text-red-400",
   };
 
   const totalRevenue = revenue ? revenue[0] : BigInt(0);
@@ -35,7 +41,9 @@ function CreatorContentRow({ contentId }: { contentId: number }) {
           </p>
         </Link>
         <div className="flex items-center gap-2 mt-1">
-          <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-widest ${statusColors[submission.status]}`}>
+          <span
+            className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-widest ${statusColors[submission.status]}`}
+          >
             {CONTENT_STATUSES[submission.status]}
           </span>
           {totalRevenue > BigInt(0) && (
@@ -53,7 +61,7 @@ function CreatorContentRow({ contentId }: { contentId: number }) {
           disabled={isPending}
           className="primary-gradient text-white text-xs"
         >
-          {isPending ? 'Claiming…' : `Claim ${formatWire(claimableAmount)}`}
+          {isPending ? "Claiming…" : `Claim ${formatWire(claimableAmount)}`}
         </Button>
       )}
     </div>
@@ -76,15 +84,21 @@ export function MyCreatorContent() {
   if (!contentIds || contentIds.length === 0) {
     return (
       <div className="text-center py-16">
-        <p className="text-lg text-[#86948a]">You haven&apos;t submitted any content yet.</p>
-        <p className="text-sm text-[#86948a] mt-2">Switch to the Submit tab to share your first creation.</p>
+        <p className="text-lg text-[#86948a]">
+          You haven&apos;t submitted any content yet.
+        </p>
+        <p className="text-sm text-[#86948a] mt-2">
+          Switch to the Submit tab to share your first creation.
+        </p>
       </div>
     );
   }
 
   return (
     <div className="space-y-3">
-      <p className="text-sm text-[#bbcabf] mb-4">{contentIds.length} submission(s)</p>
+      <p className="text-sm text-[#bbcabf] mb-4">
+        {contentIds.length} submission(s)
+      </p>
       {[...contentIds].reverse().map((id) => (
         <CreatorContentRow key={Number(id)} contentId={Number(id)} />
       ))}

@@ -1,30 +1,24 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
-} from '@/components/ui/sheet';
-import {
-  Home,
-  LayoutDashboard,
-  Ticket,
-  Film,
-  Vote,
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Film, Home, LayoutDashboard, Ticket, Vote } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useAccount } from "wagmi";
 
 const navLinks = [
-  { href: '/', label: 'Home', icon: Home },
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/tickets', label: 'Tickets', icon: Ticket },
-  { href: '/content', label: 'Content', icon: Film },
-  { href: '/governance', label: 'Governance', icon: Vote },
+  { href: "/", label: "Home", icon: Home },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/tickets", label: "Tickets", icon: Ticket },
+  { href: "/content", label: "Content", icon: Film },
+  { href: "/governance", label: "Governance", icon: Vote },
 ];
 
 interface MobileNavProps {
@@ -55,21 +49,21 @@ export function MobileNav({ open, onClose }: MobileNavProps) {
 
         <nav className="flex flex-col p-4 gap-1">
           {navLinks.map((link) => {
-            if (link.href === '/dashboard' && !isConnected) return null;
+            if (link.href === "/dashboard" && !isConnected) return null;
             const Icon = link.icon;
             const isActive =
               pathname === link.href ||
-              (link.href !== '/' && pathname.startsWith(link.href));
+              (link.href !== "/" && pathname.startsWith(link.href));
             return (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={onClose}
                 className={cn(
-                  'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
                   isActive
-                    ? 'bg-[#10b981]/10 text-[#4edea3] border-r-4 border-[#10b981]'
-                    : 'text-[#bbcabf] hover:text-[#4edea3] hover:bg-[#191f31]'
+                    ? "bg-[#10b981]/10 text-[#4edea3] border-r-4 border-[#10b981]"
+                    : "text-[#bbcabf] hover:text-[#4edea3] hover:bg-[#191f31]",
                 )}
               >
                 <Icon className="h-4 w-4" />

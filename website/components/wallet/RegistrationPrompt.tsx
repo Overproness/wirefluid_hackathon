@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRegister } from '@/hooks/useProfile';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { UserPlus, Loader2 } from 'lucide-react';
-import { toast } from 'sonner';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useRegister } from "@/hooks/useProfile";
+import { Loader2, UserPlus } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export function RegistrationPrompt() {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
   const { register, isPending } = useRegister();
 
   const handleRegister = () => {
     if (!username.trim()) {
-      toast.error('Username cannot be empty');
+      toast.error("Username cannot be empty");
       return;
     }
     register(username.trim());
@@ -29,8 +29,8 @@ export function RegistrationPrompt() {
           Register as a Fan
         </h2>
         <p className="text-[#bbcabf] text-sm mb-6">
-          Create your on-chain PSL identity. One transaction, free gas on testnet.
-          Start earning XP immediately!
+          Create your on-chain PSL identity. One transaction, free gas on
+          testnet. Start earning XP immediately!
         </p>
         <div className="space-y-4">
           <Input
@@ -38,7 +38,7 @@ export function RegistrationPrompt() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="bg-[#0c1324] border-[rgba(134,148,138,0.15)] text-[#dce1fb] placeholder:text-[#86948a] focus:border-[#4edea3]"
-            onKeyDown={(e) => e.key === 'Enter' && handleRegister()}
+            onKeyDown={(e) => e.key === "Enter" && handleRegister()}
           />
           <Button
             className="w-full primary-gradient text-white font-semibold hover:shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all"
@@ -51,7 +51,7 @@ export function RegistrationPrompt() {
                 Registering...
               </>
             ) : (
-              'Register & Enter Arena'
+              "Register & Enter Arena"
             )}
           </Button>
         </div>

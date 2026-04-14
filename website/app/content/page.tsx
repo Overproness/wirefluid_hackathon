@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ContentFeed } from '@/components/content/ContentFeed';
-import { ContentSubmitForm } from '@/components/content/ContentSubmitForm';
-import { MyCreatorContent } from '@/components/content/MyCreatorContent';
-import { WalletGate } from '@/components/wallet/WalletGate';
-import { Film, Upload, User } from 'lucide-react';
+import { ContentFeed } from "@/components/content/ContentFeed";
+import { ContentSubmitForm } from "@/components/content/ContentSubmitForm";
+import { MyCreatorContent } from "@/components/content/MyCreatorContent";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { WalletGate } from "@/components/wallet/WalletGate";
+import { Film, Upload, User } from "lucide-react";
 
 export default function ContentPage() {
   return (
@@ -19,7 +19,8 @@ export default function ContentPage() {
             Content Hub
           </h1>
           <p className="text-[#bbcabf] mt-2">
-            Fan-created content with on-chain tipping, sponsorships, and automated revenue splits.
+            Fan-created content with on-chain tipping, sponsorships, and
+            automated revenue splits.
           </p>
         </div>
 

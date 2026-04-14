@@ -1,67 +1,101 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Ticket, Shield, Film, Vote, Wallet, UserPlus, Star, Trophy, ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import Link from 'next/link';
-import { useTotalFans } from '@/hooks/useProfile';
-import { useMatchCount } from '@/hooks/useTickets';
-import { useContentCount } from '@/hooks/useContent';
-import { useProposalCount } from '@/hooks/useGovernance';
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { LeaderboardPreview } from '@/components/landing/LeaderboardPreview';
+import { LeaderboardPreview } from "@/components/landing/LeaderboardPreview";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { Button } from "@/components/ui/button";
+import { useContentCount } from "@/hooks/useContent";
+import { useProposalCount } from "@/hooks/useGovernance";
+import { useTotalFans } from "@/hooks/useProfile";
+import { useMatchCount } from "@/hooks/useTickets";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { motion } from "framer-motion";
+import {
+  ChevronDown,
+  Film,
+  Shield,
+  Star,
+  Ticket,
+  Trophy,
+  UserPlus,
+  Vote,
+  Wallet,
+} from "lucide-react";
+import Link from "next/link";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15, duration: 0.6, ease: 'easeOut' as const },
+    transition: { delay: i * 0.15, duration: 0.6, ease: "easeOut" as const },
   }),
 };
 
 const pillars = [
   {
     icon: Shield,
-    title: 'Rewards',
-    description: 'Stake your $FAN tokens and participate in predictive challenges to earn exclusive memorabilia and real-world stadium experiences.',
-    cta: 'VIEW TIERS →',
-    href: '/dashboard',
-    color: '#F59E0B',
+    title: "Rewards",
+    description:
+      "Stake your $FAN tokens and participate in predictive challenges to earn exclusive memorabilia and real-world stadium experiences.",
+    cta: "VIEW TIERS →",
+    href: "/dashboard",
+    color: "#F59E0B",
   },
   {
     icon: Vote,
-    title: 'Governance',
-    description: 'Your voice matters. Vote on pitch songs, match-day themes, and stadium upgrades through our transparent DAO infrastructure.',
-    cta: 'ACTIVE VOTES →',
-    href: '/governance',
-    color: '#38BDF8',
+    title: "Governance",
+    description:
+      "Your voice matters. Vote on pitch songs, match-day themes, and stadium upgrades through our transparent DAO infrastructure.",
+    cta: "ACTIVE VOTES →",
+    href: "/governance",
+    color: "#38BDF8",
   },
   {
     icon: Ticket,
-    title: 'Tickets',
-    description: 'Say goodbye to paper. Mint your season passes as secure dynamic NFTs with embedded VIP utility and secondary market proof.',
-    cta: 'MINT NOW →',
-    href: '/tickets',
-    color: '#4edea3',
+    title: "Tickets",
+    description:
+      "Say goodbye to paper. Mint your season passes as secure dynamic NFTs with embedded VIP utility and secondary market proof.",
+    cta: "MINT NOW →",
+    href: "/tickets",
+    color: "#4edea3",
   },
   {
     icon: Film,
-    title: 'Community',
-    description: 'Join a global stadium of fans. Share content, create watch-parties, and build your profile as a legendary diamond-tier enthusiast.',
-    cta: 'JOIN DISCORD →',
-    href: '/content',
-    color: '#a78bfa',
+    title: "Community",
+    description:
+      "Join a global stadium of fans. Share content, create watch-parties, and build your profile as a legendary diamond-tier enthusiast.",
+    cta: "JOIN DISCORD →",
+    href: "/content",
+    color: "#a78bfa",
   },
 ];
 
 const steps = [
-  { icon: Wallet, num: '01', title: 'Connect Wallet', desc: 'Seamlessly link your Metamask or Phantom to start your journey.' },
-  { icon: Star, num: '02', title: 'Claim $FAN Tokens', desc: 'Acquire $FAN on our internal dex to unlock utility across the app.' },
-  { icon: Trophy, num: '03', title: 'Participate', desc: 'Predict match outcomes and vote on crucial DAO proposals.' },
-  { icon: UserPlus, num: '04', title: 'Level Up', desc: 'Climb the leaderboard to earn Tier Badges and exclusive perks.' },
+  {
+    icon: Wallet,
+    num: "01",
+    title: "Connect Wallet",
+    desc: "Seamlessly link your Metamask or Phantom to start your journey.",
+  },
+  {
+    icon: Star,
+    num: "02",
+    title: "Claim $FAN Tokens",
+    desc: "Acquire $FAN on our internal dex to unlock utility across the app.",
+  },
+  {
+    icon: Trophy,
+    num: "03",
+    title: "Participate",
+    desc: "Predict match outcomes and vote on crucial DAO proposals.",
+  },
+  {
+    icon: UserPlus,
+    num: "04",
+    title: "Level Up",
+    desc: "Climb the leaderboard to earn Tier Badges and exclusive perks.",
+  },
 ];
 
 function LiveStatBar() {
@@ -71,18 +105,34 @@ function LiveStatBar() {
   const { proposalCount } = useProposalCount();
 
   const stats = [
-    { label: 'FANS REGISTERED', value: totalFans ? Number(totalFans).toLocaleString() : '—' },
-    { label: 'MATCHES', value: matchCount ? Number(matchCount).toLocaleString() : '—' },
-    { label: 'CONTENT PIECES', value: contentCount ? Number(contentCount).toLocaleString() : '—' },
-    { label: 'ACTIVE PROPOSALS', value: proposalCount ? Number(proposalCount).toLocaleString() : '—' },
+    {
+      label: "FANS REGISTERED",
+      value: totalFans ? Number(totalFans).toLocaleString() : "—",
+    },
+    {
+      label: "MATCHES",
+      value: matchCount ? Number(matchCount).toLocaleString() : "—",
+    },
+    {
+      label: "CONTENT PIECES",
+      value: contentCount ? Number(contentCount).toLocaleString() : "—",
+    },
+    {
+      label: "ACTIVE PROPOSALS",
+      value: proposalCount ? Number(proposalCount).toLocaleString() : "—",
+    },
   ];
 
   return (
     <div className="glass-card rounded-xl p-6 grid grid-cols-2 md:grid-cols-4 gap-6">
       {stats.map((stat) => (
         <div key={stat.label} className="text-center">
-          <p className="font-mono text-2xl md:text-3xl font-bold text-[#4edea3]">{stat.value}</p>
-          <p className="text-xs font-mono uppercase tracking-widest text-[#bbcabf] mt-1">{stat.label}</p>
+          <p className="font-mono text-2xl md:text-3xl font-bold text-[#4edea3]">
+            {stat.value}
+          </p>
+          <p className="text-xs font-mono uppercase tracking-widest text-[#bbcabf] mt-1">
+            {stat.label}
+          </p>
         </div>
       ))}
     </div>
@@ -104,7 +154,7 @@ export default function LandingPage() {
         <motion.div
           className="absolute top-1/4 right-[15%] w-16 h-16 opacity-20"
           animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         >
           <div className="w-full h-full rounded-full border-2 border-[#4edea3] relative">
             <div className="absolute inset-0 border-t-2 border-[#4edea3] rounded-full rotate-45" />
@@ -121,7 +171,13 @@ export default function LandingPage() {
             className="mb-6"
           >
             <div className="inline-flex h-16 w-16 items-center justify-center">
-              <svg viewBox="0 0 48 48" className="h-16 w-16 text-[#4edea3]" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <svg
+                viewBox="0 0 48 48"
+                className="h-16 w-16 text-[#4edea3]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
                 <path d="M24 4L28 20L44 24L28 28L24 44L20 28L4 24L20 20Z" />
               </svg>
             </div>
@@ -134,7 +190,8 @@ export default function LandingPage() {
             animate="visible"
             className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight text-[#dce1fb] leading-none"
           >
-            OWN YOUR <span className="text-[#4edea3] text-glow-primary">PSL</span>
+            OWN YOUR{" "}
+            <span className="text-[#4edea3] text-glow-primary">PSL</span>
             <br />
             EXPERIENCE
           </motion.h1>
@@ -146,8 +203,8 @@ export default function LandingPage() {
             animate="visible"
             className="mt-6 max-w-2xl mx-auto text-[#bbcabf] text-base md:text-lg"
           >
-            The first decentralized fan ecosystem built for the electric spirit of Pakistan Super League.
-            Governance, Rewards, and Digital Assets.
+            The first decentralized fan ecosystem built for the electric spirit
+            of Pakistan Super League. Governance, Rewards, and Digital Assets.
           </motion.p>
 
           <motion.div
@@ -216,12 +273,17 @@ export default function LandingPage() {
                       className="h-10 w-10 rounded-lg flex items-center justify-center mb-4"
                       style={{ backgroundColor: `${pillar.color}15` }}
                     >
-                      <Icon className="h-5 w-5" style={{ color: pillar.color }} />
+                      <Icon
+                        className="h-5 w-5"
+                        style={{ color: pillar.color }}
+                      />
                     </div>
                     <h3 className="font-heading text-xl font-bold text-[#dce1fb] mb-2">
                       {pillar.title}
                     </h3>
-                    <p className="text-sm text-[#bbcabf] mb-4">{pillar.description}</p>
+                    <p className="text-sm text-[#bbcabf] mb-4">
+                      {pillar.description}
+                    </p>
                     <span
                       className="font-mono text-xs uppercase tracking-widest group-hover:tracking-[0.2em] transition-all"
                       style={{ color: pillar.color }}
@@ -243,7 +305,9 @@ export default function LandingPage() {
             <h2 className="font-display text-4xl md:text-5xl text-[#dce1fb] uppercase tracking-wide">
               Enter The Arena
             </h2>
-            <p className="text-[#bbcabf] mt-3">Follow the path to becoming a Pro Fan</p>
+            <p className="text-[#bbcabf] mt-3">
+              Follow the path to becoming a Pro Fan
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

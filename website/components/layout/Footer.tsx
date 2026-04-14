@@ -1,14 +1,14 @@
-import Link from 'next/link';
-import { CONTRACTS } from '@/lib/contracts';
-import { formatAddress } from '@/lib/utils';
-import { WIRESCAN_URL } from '@/lib/constants';
+import { WIRESCAN_URL } from "@/lib/constants";
+import { CONTRACTS } from "@/lib/contracts";
+import { formatAddress } from "@/lib/utils";
+import Link from "next/link";
 
 const contractLinks = [
-  { name: 'FanToken', address: CONTRACTS.FanToken.address },
-  { name: 'FanIdentity', address: CONTRACTS.FanIdentity.address },
-  { name: 'TicketFactory', address: CONTRACTS.TicketFactory.address },
-  { name: 'ContentManager', address: CONTRACTS.ContentManager.address },
-  { name: 'PSLGovernor', address: CONTRACTS.PSLGovernor.address },
+  { name: "FanToken", address: CONTRACTS.FanToken.address },
+  { name: "FanIdentity", address: CONTRACTS.FanIdentity.address },
+  { name: "TicketFactory", address: CONTRACTS.TicketFactory.address },
+  { name: "ContentManager", address: CONTRACTS.ContentManager.address },
+  { name: "PSLGovernor", address: CONTRACTS.PSLGovernor.address },
 ];
 
 export function Footer() {
@@ -27,7 +27,8 @@ export function Footer() {
               </span>
             </div>
             <p className="text-sm text-[#bbcabf]">
-              The first decentralized fan ecosystem built for Pakistan Super League.
+              The first decentralized fan ecosystem built for Pakistan Super
+              League.
             </p>
             <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#191f31] text-xs text-[#bbcabf]">
               <span className="h-2 w-2 rounded-full bg-[#4edea3] animate-pulse" />
@@ -42,17 +43,26 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/tickets" className="text-[#bbcabf] hover:text-[#4edea3] transition-colors">
+                <Link
+                  href="/tickets"
+                  className="text-[#bbcabf] hover:text-[#4edea3] transition-colors"
+                >
                   Tickets
                 </Link>
               </li>
               <li>
-                <Link href="/content" className="text-[#bbcabf] hover:text-[#4edea3] transition-colors">
+                <Link
+                  href="/content"
+                  className="text-[#bbcabf] hover:text-[#4edea3] transition-colors"
+                >
                   Content
                 </Link>
               </li>
               <li>
-                <Link href="/governance" className="text-[#bbcabf] hover:text-[#4edea3] transition-colors">
+                <Link
+                  href="/governance"
+                  className="text-[#bbcabf] hover:text-[#4edea3] transition-colors"
+                >
                   Governance
                 </Link>
               </li>

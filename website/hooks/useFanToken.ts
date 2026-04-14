@@ -1,7 +1,7 @@
 'use client';
 
-import { useReadContract, useAccount } from 'wagmi';
 import { CONTRACTS } from '@/lib/contracts';
+import { useAccount, useReadContract } from 'wagmi';
 
 export function useFanTokenBalance(address?: `0x${string}`) {
   const { address: connectedAddress } = useAccount();

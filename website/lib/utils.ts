@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { formatEther } from "viem"
-import { TIER_NAMES, TIER_COLORS, TIER_THRESHOLDS } from "./constants"
+import { TIER_COLORS, TIER_NAMES, TIER_THRESHOLDS } from "./constants"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))

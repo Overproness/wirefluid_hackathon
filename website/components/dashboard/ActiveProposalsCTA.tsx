@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useProposalCount, useProposal, useHasVoted } from '@/hooks/useGovernance';
-import Link from 'next/link';
-import { Bell } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
+import { useProposalCount } from "@/hooks/useGovernance";
+import { Bell } from "lucide-react";
+import Link from "next/link";
 
 export function ActiveProposalsCTA() {
   const { proposalCount } = useProposalCount();
@@ -18,9 +18,12 @@ export function ActiveProposalsCTA() {
         <Bell className="h-5 w-5 text-[#F59E0B]" />
       </div>
       <div className="flex-1">
-        <h4 className="font-heading text-sm font-bold text-[#dce1fb]">Active Proposals</h4>
+        <h4 className="font-heading text-sm font-bold text-[#dce1fb]">
+          Active Proposals
+        </h4>
         <p className="text-xs text-[#bbcabf]">
-          {count} pending DAO votes found. Cast your vote to earn 50 XP per proposal.
+          {count} pending DAO votes found. Cast your vote to earn 50 XP per
+          proposal.
         </p>
       </div>
       <Link href="/governance">

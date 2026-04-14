@@ -1,18 +1,31 @@
-'use client';
+"use client";
 
-import { use, useState } from 'react';
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { useProposal, useHasVoted, useVote, useVoteWeight, useOptionVotes, useWinningOption } from '@/hooks/useGovernance';
-import { PROPOSAL_TYPES, PROPOSAL_STATES } from '@/lib/constants';
-import { formatAddress, formatVotes } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
-import { ArrowLeft, CheckCircle } from 'lucide-react';
-import Link from 'next/link';
-import { useAccount } from 'wagmi';
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  useHasVoted,
+  useOptionVotes,
+  useProposal,
+  useVote,
+  useVoteWeight,
+  useWinningOption,
+} from "@/hooks/useGovernance";
+import { PROPOSAL_STATES, PROPOSAL_TYPES } from "@/lib/constants";
+import { formatAddress, formatVotes } from "@/lib/utils";
+import { ArrowLeft, CheckCircle } from "lucide-react";
+import Link from "next/link";
+import { use, useState } from "react";
+import { useAccount } from "wagmi";
 
-function OptionBar({ proposalId, optionIndex, label, totalVotes, isWinner }: {
+function OptionBar({
+  proposalId,
+  optionIndex,
+  label,
+  totalVotes,
+  isWinner,
+}: {
   proposalId: number;
   optionIndex: number;
   label: string;
@@ -25,17 +38,21 @@ function OptionBar({ proposalId, optionIndex, label, totalVotes, isWinner }: {
   const pct = total > 0 ? Math.round((optionVotes / total) * 100) : 0;
 
   return (
-    <div className={`rounded-lg p-3 ${isWinner ? 'ring-1 ring-[#4edea3]' : ''}`}>
+    <div
+      className={`rounded-lg p-3 ${isWinner ? "ring-1 ring-[#4edea3]" : ""}`}
+    >
       <div className="flex items-center justify-between mb-1">
         <span className="text-sm text-[#dce1fb] flex items-center gap-2">
           {label}
           {isWinner && <CheckCircle className="h-4 w-4 text-[#4edea3]" />}
         </span>
-        <span className="font-mono text-sm text-[#bbcabf]">{pct}% ({formatVotes(votes || BigInt(0))})</span>
+        <span className="font-mono text-sm text-[#bbcabf]">
+          {pct}% ({formatVotes(votes || BigInt(0))})
+        </span>
       </div>
       <div className="h-2 bg-[#191f31] rounded-full overflow-hidden">
         <div
-          className={`h-full rounded-full transition-all duration-500 ${isWinner ? 'bg-gradient-to-r from-[#10b981] to-[#4edea3]' : 'bg-[#38BDF8]'}`}
+          className={`h-full rounded-full transition-all duration-500 ${isWinner ? "bg-gradient-to-r from-[#10b981] to-[#4edea3]" : "bg-[#38BDF8]"}`}
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -43,7 +60,11 @@ function OptionBar({ proposalId, optionIndex, label, totalVotes, isWinner }: {
   );
 }
 
-export default function ProposalDetailPage({ params }: { params: Promise<{ proposalId: string }> }) {
+export default function ProposalDetailPage({
+  params,
+}: {
+  params: Promise<{ proposalId: string }>;
+}) {
   const { proposalId: id } = use(params);
   const proposalId = parseInt(id);
   const { address } = useAccount();
@@ -66,7 +87,10 @@ export default function ProposalDetailPage({ params }: { params: Promise<{ propo
     <div className="min-h-screen bg-[#020617]">
       <Navbar />
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Link href="/governance" className="inline-flex items-center gap-2 text-sm text-[#bbcabf] hover:text-[#4edea3] mb-6">
+        <Link
+          href="/governance"
+          className="inline-flex items-center gap-2 text-sm text-[#bbcabf] hover:text-[#4edea3] mb-6"
+        >
           <ArrowLeft className="h-4 w-4" /> Back to Governance
         </Link>
 
@@ -81,13 +105,17 @@ export default function ProposalDetailPage({ params }: { params: Promise<{ propo
             <div>
               <div className="flex items-center gap-2 mb-2 flex-wrap">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#F59E0B]">
-                  {PROPOSAL_TYPES[proposal.proposalType] || 'General'}
+                  {PROPOSAL_TYPES[proposal.proposalType] || "General"}
                 </span>
-                <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-widest ${isActive ? 'bg-[#4edea3]/20 text-[#4edea3]' : 'bg-[#191f31] text-[#86948a]'}`}>
-                  {isActive ? 'Active' : PROPOSAL_STATES[proposal.state]}
+                <span
+                  className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-widest ${isActive ? "bg-[#4edea3]/20 text-[#4edea3]" : "bg-[#191f31] text-[#86948a]"}`}
+                >
+                  {isActive ? "Active" : PROPOSAL_STATES[proposal.state]}
                 </span>
               </div>
-              <h1 className="font-heading text-3xl font-bold text-[#dce1fb]">{proposal.title}</h1>
+              <h1 className="font-heading text-3xl font-bold text-[#dce1fb]">
+                {proposal.title}
+              </h1>
               <div className="flex items-center gap-3 mt-2 text-xs text-[#86948a]">
                 <span>by {formatAddress(proposal.proposer)}</span>
                 <span>•</span>
@@ -95,7 +123,12 @@ export default function ProposalDetailPage({ params }: { params: Promise<{ propo
                 {isActive && (
                   <>
                     <span>•</span>
-                    <span>Ends {new Date(Number(proposal.endTime) * 1000).toLocaleString()}</span>
+                    <span>
+                      Ends{" "}
+                      {new Date(
+                        Number(proposal.endTime) * 1000,
+                      ).toLocaleString()}
+                    </span>
                   </>
                 )}
               </div>
@@ -103,13 +136,15 @@ export default function ProposalDetailPage({ params }: { params: Promise<{ propo
 
             {/* Description */}
             <div className="glass-card rounded-xl p-6">
-              <p className="text-[#bbcabf] leading-relaxed">{proposal.description}</p>
+              <p className="text-[#bbcabf] leading-relaxed">
+                {proposal.description}
+              </p>
             </div>
 
             {/* Results */}
             <div className="glass-card rounded-xl p-6">
               <h3 className="font-heading text-lg font-bold text-[#dce1fb] mb-4">
-                {isActive ? 'Current Results' : 'Final Results'}
+                {isActive ? "Current Results" : "Final Results"}
               </h3>
               <div className="space-y-3">
                 {proposal.options.map((opt, i) => (
@@ -119,7 +154,9 @@ export default function ProposalDetailPage({ params }: { params: Promise<{ propo
                     optionIndex={i}
                     label={opt}
                     totalVotes={proposal.totalVotes}
-                    isWinner={winningIndex !== undefined && Number(winningIndex) === i}
+                    isWinner={
+                      winningIndex !== undefined && Number(winningIndex) === i
+                    }
                   />
                 ))}
               </div>
@@ -128,10 +165,16 @@ export default function ProposalDetailPage({ params }: { params: Promise<{ propo
             {/* Voting */}
             {isActive && !hasVoted && address && (
               <div className="glass-card rounded-xl p-6">
-                <h3 className="font-heading text-lg font-bold text-[#dce1fb] mb-2">Cast Your Vote</h3>
+                <h3 className="font-heading text-lg font-bold text-[#dce1fb] mb-2">
+                  Cast Your Vote
+                </h3>
                 {voteWeight && (
                   <p className="text-xs text-[#bbcabf] mb-4">
-                    Your vote weight: <span className="font-mono text-[#4edea3]">{Number(voteWeight)}</span> (based on your tier)
+                    Your vote weight:{" "}
+                    <span className="font-mono text-[#4edea3]">
+                      {Number(voteWeight)}
+                    </span>{" "}
+                    (based on your tier)
                   </p>
                 )}
 
@@ -142,8 +185,8 @@ export default function ProposalDetailPage({ params }: { params: Promise<{ propo
                       onClick={() => setSelectedOption(i)}
                       className={`w-full text-left p-3 rounded-lg transition-colors ${
                         selectedOption === i
-                          ? 'bg-[#10b981]/20 ring-1 ring-[#10b981] text-[#4edea3]'
-                          : 'bg-[#191f31] text-[#bbcabf] hover:bg-[#191f31]/80'
+                          ? "bg-[#10b981]/20 ring-1 ring-[#10b981] text-[#4edea3]"
+                          : "bg-[#191f31] text-[#bbcabf] hover:bg-[#191f31]/80"
                       }`}
                     >
                       <span className="text-sm font-medium">{opt}</span>
@@ -156,7 +199,11 @@ export default function ProposalDetailPage({ params }: { params: Promise<{ propo
                   disabled={selectedOption === null || votePending}
                   className="w-full primary-gradient text-white"
                 >
-                  {votePending ? 'Submitting…' : selectedOption !== null ? `Vote for "${proposal.options[selectedOption]}"` : 'Select an option'}
+                  {votePending
+                    ? "Submitting…"
+                    : selectedOption !== null
+                      ? `Vote for "${proposal.options[selectedOption]}"`
+                      : "Select an option"}
                 </Button>
               </div>
             )}
@@ -164,7 +211,9 @@ export default function ProposalDetailPage({ params }: { params: Promise<{ propo
             {hasVoted && (
               <div className="glass-card rounded-xl p-4 flex items-center gap-3 border-l-4 border-[#4edea3]">
                 <CheckCircle className="h-5 w-5 text-[#4edea3]" />
-                <p className="text-sm text-[#bbcabf]">You&apos;ve already voted on this proposal. +25 XP earned!</p>
+                <p className="text-sm text-[#bbcabf]">
+                  You&apos;ve already voted on this proposal. +25 XP earned!
+                </p>
               </div>
             )}
           </div>

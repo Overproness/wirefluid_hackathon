@@ -1,13 +1,16 @@
-'use client';
+"use client";
 
-import { useTokenIdCounter, useTicketBalance, useTicketCategory, useMatch, useIsCheckedIn } from '@/hooks/useTickets';
-import { useAccount } from 'wagmi';
-import { useReadContract } from 'wagmi';
-import { CONTRACTS } from '@/lib/contracts';
-import { formatWire } from '@/lib/utils';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  useIsCheckedIn,
+  useMatch,
+  useTicketBalance,
+  useTicketCategory,
+  useTokenIdCounter,
+} from "@/hooks/useTickets";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useAccount } from "wagmi";
 
 function TicketCard({ tokenId }: { tokenId: number }) {
   const { address } = useAccount();
@@ -37,10 +40,10 @@ function TicketCard({ tokenId }: { tokenId: number }) {
         </div>
       </div>
       <p className="text-xs text-[#86948a] mb-3">
-        {new Date(Number(match.date) * 1000).toLocaleDateString('en-US', {
-          month: 'short',
-          day: 'numeric',
-          year: 'numeric',
+        {new Date(Number(match.date) * 1000).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
         })}
       </p>
       <div className="flex items-center justify-between">
@@ -52,7 +55,10 @@ function TicketCard({ tokenId }: { tokenId: number }) {
             Checked In
           </span>
         ) : (
-          <Button size="sm" className="primary-gradient text-white text-xs h-7 px-3">
+          <Button
+            size="sm"
+            className="primary-gradient text-white text-xs h-7 px-3"
+          >
             Check-in
           </Button>
         )}
@@ -68,7 +74,9 @@ export function MyTicketsSection() {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-display text-2xl text-[#dce1fb] uppercase">Active Match Tickets</h2>
+        <h2 className="font-display text-2xl text-[#dce1fb] uppercase">
+          Active Match Tickets
+        </h2>
         <div className="flex gap-2">
           <button className="h-8 w-8 rounded-lg bg-[#191f31] flex items-center justify-center text-[#bbcabf] hover:text-[#4edea3]">
             <ChevronLeft className="h-4 w-4" />
@@ -82,10 +90,15 @@ export function MyTicketsSection() {
       <div className="flex gap-4 overflow-x-auto pb-2">
         {isLoading ? (
           Array.from({ length: 3 }).map((_, i) => (
-            <Skeleton key={i} className="h-40 min-w-[280px] bg-[#191f31] rounded-xl" />
+            <Skeleton
+              key={i}
+              className="h-40 min-w-[280px] bg-[#191f31] rounded-xl"
+            />
           ))
         ) : count === 0 ? (
-          <p className="text-sm text-[#86948a] py-8">No tickets found. Browse matches to get started.</p>
+          <p className="text-sm text-[#86948a] py-8">
+            No tickets found. Browse matches to get started.
+          </p>
         ) : (
           Array.from({ length: count }).map((_, i) => (
             <TicketCard key={i + 1} tokenId={i + 1} />

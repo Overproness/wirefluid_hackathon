@@ -1,36 +1,36 @@
-'use client';
+"use client";
 
-import { useTotalFans } from '@/hooks/useProfile';
-import { useReadContract } from 'wagmi';
-import { CONTRACTS } from '@/lib/contracts';
-import { formatAddress, getTierName, getTierColor } from '@/lib/utils';
-import { TIER_BG_COLORS } from '@/lib/constants';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from "@/components/ui/skeleton";
+import { useTotalFans } from "@/hooks/useProfile";
+import { TIER_BG_COLORS } from "@/lib/constants";
+import { CONTRACTS } from "@/lib/contracts";
+import { formatAddress, getTierColor, getTierName } from "@/lib/utils";
+import { useReadContract } from "wagmi";
 
 function FanRow({ index }: { index: number }) {
   const { data: fanAddress } = useReadContract({
     ...CONTRACTS.FanIdentity,
-    functionName: 'allFans',
+    functionName: "allFans",
     args: [BigInt(index)],
   });
 
   const { data: profile } = useReadContract({
     ...CONTRACTS.FanIdentity,
-    functionName: 'getProfile',
+    functionName: "getProfile",
     args: fanAddress ? [fanAddress as `0x${string}`] : undefined,
     query: { enabled: !!fanAddress },
   });
 
   const { data: tier } = useReadContract({
     ...CONTRACTS.FanIdentity,
-    functionName: 'getTier',
+    functionName: "getTier",
     args: fanAddress ? [fanAddress as `0x${string}`] : undefined,
     query: { enabled: !!fanAddress },
   });
 
   const { data: balance } = useReadContract({
     ...CONTRACTS.FanToken,
-    functionName: 'balanceOf',
+    functionName: "balanceOf",
     args: fanAddress ? [fanAddress as `0x${string}`] : undefined,
     query: { enabled: !!fanAddress },
   });
@@ -49,14 +49,14 @@ function FanRow({ index }: { index: number }) {
   const tierNum = tier as number;
   const tierName = getTierName(tierNum);
   const tierColor = getTierColor(tierNum);
-  const tierBg = TIER_BG_COLORS[tierName] || 'bg-amber-600/20';
+  const tierBg = TIER_BG_COLORS[tierName] || "bg-amber-600/20";
   const xp = Number(p.totalXP);
   const fan = balance ? Number(balance) / 1e18 : 0;
 
   return (
     <tr className="border-b border-[rgba(134,148,138,0.08)]">
       <td className="py-3 px-4 font-mono text-lg font-bold text-[#4edea3]">
-        {String(index + 1).padStart(2, '0')}
+        {String(index + 1).padStart(2, "0")}
       </td>
       <td className="py-3 px-4">
         <div className="flex items-center gap-3">
@@ -72,20 +72,26 @@ function FanRow({ index }: { index: number }) {
         </div>
       </td>
       <td className="py-3 px-4">
-        <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-widest ${tierBg} ${tierColor}`}>
+        <span
+          className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-widest ${tierBg} ${tierColor}`}
+        >
           {tierName}
         </span>
       </td>
       <td className="py-3 px-4">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-[#bbcabf]">Lvl. {Math.floor(xp / 100)}</span>
+          <span className="text-xs font-mono text-[#bbcabf]">
+            Lvl. {Math.floor(xp / 100)}
+          </span>
           <div className="flex-1 h-1.5 bg-[#191f31] rounded-full overflow-hidden max-w-[100px]">
             <div
               className="h-full bg-[#4edea3] rounded-full"
               style={{ width: `${Math.min(xp / 150, 100)}%` }}
             />
           </div>
-          <span className="text-xs font-mono text-[#86948a]">{Math.min(Math.round(xp / 150), 100)}%</span>
+          <span className="text-xs font-mono text-[#86948a]">
+            {Math.min(Math.round(xp / 150), 100)}%
+          </span>
         </div>
       </td>
       <td className="py-3 px-4 text-right">
@@ -119,11 +125,21 @@ export function LeaderboardPreview() {
         <table className="w-full">
           <thead>
             <tr className="border-b border-[rgba(134,148,138,0.15)]">
-              <th className="py-3 px-4 text-left font-mono text-xs uppercase tracking-widest text-[#86948a]">Rank</th>
-              <th className="py-3 px-4 text-left font-mono text-xs uppercase tracking-widest text-[#86948a]">Fan Profile</th>
-              <th className="py-3 px-4 text-left font-mono text-xs uppercase tracking-widest text-[#86948a]">Tier Badge</th>
-              <th className="py-3 px-4 text-left font-mono text-xs uppercase tracking-widest text-[#86948a]">Experience Progress</th>
-              <th className="py-3 px-4 text-right font-mono text-xs uppercase tracking-widest text-[#86948a]">Fan Balance</th>
+              <th className="py-3 px-4 text-left font-mono text-xs uppercase tracking-widest text-[#86948a]">
+                Rank
+              </th>
+              <th className="py-3 px-4 text-left font-mono text-xs uppercase tracking-widest text-[#86948a]">
+                Fan Profile
+              </th>
+              <th className="py-3 px-4 text-left font-mono text-xs uppercase tracking-widest text-[#86948a]">
+                Tier Badge
+              </th>
+              <th className="py-3 px-4 text-left font-mono text-xs uppercase tracking-widest text-[#86948a]">
+                Experience Progress
+              </th>
+              <th className="py-3 px-4 text-right font-mono text-xs uppercase tracking-widest text-[#86948a]">
+                Fan Balance
+              </th>
             </tr>
           </thead>
           <tbody>

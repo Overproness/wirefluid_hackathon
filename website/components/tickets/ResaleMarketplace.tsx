@@ -1,11 +1,15 @@
-'use client';
+"use client";
 
-import { useTotalListings, useListing, useBuyResaleTicket } from '@/hooks/useTickets';
-import { useTicketCategory, useMatch } from '@/hooks/useTickets';
-import { formatWire, formatAddress } from '@/lib/utils';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  useBuyResaleTicket,
+  useListing,
+  useMatch,
+  useTicketCategory,
+  useTotalListings,
+} from "@/hooks/useTickets";
+import { formatAddress, formatWire } from "@/lib/utils";
 
 function ResaleListingCard({ listingId }: { listingId: number }) {
   const { listing, isLoading } = useListing(listingId);
@@ -44,10 +48,10 @@ function ResaleListingCard({ listingId }: { listingId: number }) {
 
       <div className="flex items-center justify-between">
         <div>
-          <span className="font-mono text-lg font-bold text-[#4edea3]">{formatWire(listing.price)}</span>
-          <span className="text-xs text-[#86948a] ml-2">
-            Qty: 1
+          <span className="font-mono text-lg font-bold text-[#4edea3]">
+            {formatWire(listing.price)}
           </span>
+          <span className="text-xs text-[#86948a] ml-2">Qty: 1</span>
         </div>
         <Button
           onClick={handleBuy}
@@ -55,7 +59,7 @@ function ResaleListingCard({ listingId }: { listingId: number }) {
           size="sm"
           className="primary-gradient text-white text-xs"
         >
-          {isPending ? 'Buying…' : 'Buy Now'}
+          {isPending ? "Buying…" : "Buy Now"}
         </Button>
       </div>
     </div>

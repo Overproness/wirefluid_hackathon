@@ -1,13 +1,12 @@
-'use client';
+"use client";
 
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { ProposalsList } from '@/components/governance/ProposalsList';
-import { CreateProposalModal } from '@/components/governance/CreateProposalModal';
-import { Button } from '@/components/ui/button';
-import { useState } from 'react';
-import { WalletGate } from '@/components/wallet/WalletGate';
-import { Plus } from 'lucide-react';
+import { CreateProposalModal } from "@/components/governance/CreateProposalModal";
+import { ProposalsList } from "@/components/governance/ProposalsList";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import { useState } from "react";
 
 export default function GovernancePage() {
   const [createOpen, setCreateOpen] = useState(false);
@@ -22,7 +21,8 @@ export default function GovernancePage() {
               DAO Governance
             </h1>
             <p className="text-[#bbcabf] mt-2">
-              Vote on MVP awards, fan polls, and charitable initiatives. Tier-weighted voting powered by on-chain XP.
+              Vote on MVP awards, fan polls, and charitable initiatives.
+              Tier-weighted voting powered by on-chain XP.
             </p>
           </div>
           <Button
@@ -43,7 +43,10 @@ export default function GovernancePage() {
           <Plus className="h-6 w-6" />
         </Button>
 
-        <CreateProposalModal open={createOpen} onClose={() => setCreateOpen(false)} />
+        <CreateProposalModal
+          open={createOpen}
+          onClose={() => setCreateOpen(false)}
+        />
       </main>
       <Footer />
     </div>

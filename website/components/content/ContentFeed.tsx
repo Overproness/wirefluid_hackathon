@@ -1,14 +1,13 @@
-'use client';
+"use client";
 
-import { useContentCount, useSubmission } from '@/hooks/useContent';
-import { CONTENT_STATUSES } from '@/lib/constants';
-import { formatAddress, formatWire } from '@/lib/utils';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Button } from '@/components/ui/button';
-import { useState } from 'react';
-import { TipModal } from './TipModal';
-import { SponsorModal } from './SponsorModal';
-import Link from 'next/link';
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useContentCount, useSubmission } from "@/hooks/useContent";
+import { formatAddress } from "@/lib/utils";
+import Link from "next/link";
+import { useState } from "react";
+import { SponsorModal } from "./SponsorModal";
+import { TipModal } from "./TipModal";
 
 function ContentCard({ contentId }: { contentId: number }) {
   const { submission, isLoading } = useSubmission(contentId);
@@ -38,29 +37,52 @@ function ContentCard({ contentId }: { contentId: number }) {
                   {submission.title}
                 </h3>
               </Link>
-              <p className="text-xs text-[#86948a] mt-1 line-clamp-2">{submission.description}</p>
+              <p className="text-xs text-[#86948a] mt-1 line-clamp-2">
+                {submission.description}
+              </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2 text-xs text-[#86948a]">
             <span>by {formatAddress(submission.creator)}</span>
             <span>•</span>
-            <span>{new Date(Number(submission.submittedAt) * 1000).toLocaleDateString()}</span>
+            <span>
+              {new Date(
+                Number(submission.submittedAt) * 1000,
+              ).toLocaleDateString()}
+            </span>
           </div>
 
           <div className="flex gap-2">
-            <Button size="sm" onClick={() => setTipOpen(true)} className="primary-gradient text-white text-xs flex-1">
+            <Button
+              size="sm"
+              onClick={() => setTipOpen(true)}
+              className="primary-gradient text-white text-xs flex-1"
+            >
               ❤️ Tip
             </Button>
-            <Button size="sm" onClick={() => setSponsorOpen(true)} variant="outline" className="border-[rgba(134,148,138,0.15)] text-[#F59E0B] text-xs flex-1">
+            <Button
+              size="sm"
+              onClick={() => setSponsorOpen(true)}
+              variant="outline"
+              className="border-[rgba(134,148,138,0.15)] text-[#F59E0B] text-xs flex-1"
+            >
               💎 Sponsor
             </Button>
           </div>
         </div>
       </div>
 
-      <TipModal contentId={contentId} open={tipOpen} onClose={() => setTipOpen(false)} />
-      <SponsorModal contentId={contentId} open={sponsorOpen} onClose={() => setSponsorOpen(false)} />
+      <TipModal
+        contentId={contentId}
+        open={tipOpen}
+        onClose={() => setTipOpen(false)}
+      />
+      <SponsorModal
+        contentId={contentId}
+        open={sponsorOpen}
+        onClose={() => setSponsorOpen(false)}
+      />
     </>
   );
 }
@@ -83,7 +105,9 @@ export function ContentFeed() {
     return (
       <div className="text-center py-16">
         <p className="text-lg text-[#86948a]">No content published yet.</p>
-        <p className="text-sm text-[#86948a] mt-2">Be the first to submit cricket content!</p>
+        <p className="text-sm text-[#86948a] mt-2">
+          Be the first to submit cricket content!
+        </p>
       </div>
     );
   }

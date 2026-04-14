@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { MatchesList } from '@/components/tickets/MatchesList';
-import { ResaleMarketplace } from '@/components/tickets/ResaleMarketplace';
-import { Shield } from 'lucide-react';
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { MatchesList } from "@/components/tickets/MatchesList";
+import { ResaleMarketplace } from "@/components/tickets/ResaleMarketplace";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Shield } from "lucide-react";
 
 export default function TicketsPage() {
   return (
@@ -18,7 +18,8 @@ export default function TicketsPage() {
             Match Tickets
           </h1>
           <p className="text-[#bbcabf] mt-2">
-            Anti-scalp protected NFT tickets. Maximum resale price enforced on-chain.
+            Anti-scalp protected NFT tickets. Maximum resale price enforced
+            on-chain.
           </p>
         </div>
 

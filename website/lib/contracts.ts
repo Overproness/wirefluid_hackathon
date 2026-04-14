@@ -1,9 +1,9 @@
-import { FanTokenABI } from './abis/FanToken';
-import { FanIdentityABI } from './abis/FanIdentity';
-import { TicketFactoryABI } from './abis/TicketFactory';
 import { ContentManagerABI } from './abis/ContentManager';
-import { RevenueSplitterABI } from './abis/RevenueSplitter';
+import { FanIdentityABI } from './abis/FanIdentity';
+import { FanTokenABI } from './abis/FanToken';
 import { PSLGovernorABI } from './abis/PSLGovernor';
+import { RevenueSplitterABI } from './abis/RevenueSplitter';
+import { TicketFactoryABI } from './abis/TicketFactory';
 
 export const CONTRACTS = {
   FanToken: {

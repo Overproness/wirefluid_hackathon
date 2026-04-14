@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { AlertTriangle } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { AlertTriangle } from "lucide-react";
 
 export default function Error({
   error,
@@ -20,7 +20,7 @@ export default function Error({
           Something went wrong
         </h2>
         <p className="text-sm text-[#bbcabf] mb-6">
-          {error.message || 'An unexpected error occurred. Please try again.'}
+          {error.message || "An unexpected error occurred. Please try again."}
         </p>
         <Button onClick={reset} className="primary-gradient text-white">
           Try Again

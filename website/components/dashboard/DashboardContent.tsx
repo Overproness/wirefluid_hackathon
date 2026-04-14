@@ -1,16 +1,15 @@
-'use client';
+"use client";
 
-import { useAccount } from 'wagmi';
-import { useProfile } from '@/hooks/useProfile';
-import { useFanTokenBalance } from '@/hooks/useFanToken';
-import { useCreatorSubmissions, useContentCount } from '@/hooks/useContent';
-import { FanProfileCard } from './FanProfileCard';
-import { StatsGrid } from './StatsGrid';
-import { XPBreakdownChart } from './XPBreakdownChart';
-import { MyContentSection } from './MyContentSection';
-import { ActiveProposalsCTA } from './ActiveProposalsCTA';
-import { MyTicketsSection } from './MyTicketsSection';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from "@/components/ui/skeleton";
+import { useFanTokenBalance } from "@/hooks/useFanToken";
+import { useProfile } from "@/hooks/useProfile";
+import { useAccount } from "wagmi";
+import { ActiveProposalsCTA } from "./ActiveProposalsCTA";
+import { FanProfileCard } from "./FanProfileCard";
+import { MyContentSection } from "./MyContentSection";
+import { MyTicketsSection } from "./MyTicketsSection";
+import { StatsGrid } from "./StatsGrid";
+import { XPBreakdownChart } from "./XPBreakdownChart";
 
 export function DashboardContent() {
   const { address } = useAccount();

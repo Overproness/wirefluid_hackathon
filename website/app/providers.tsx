@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
-import { WagmiProvider } from 'wagmi';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Toaster } from 'sonner';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { config } from '@/lib/wagmi';
-import '@rainbow-me/rainbowkit/styles.css';
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { config } from "@/lib/wagmi";
+import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
+import "@rainbow-me/rainbowkit/styles.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "sonner";
+import { WagmiProvider } from "wagmi";
 
 const queryClient = new QueryClient();
 
@@ -16,10 +16,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider
           theme={darkTheme({
-            accentColor: '#10b981',
-            accentColorForeground: 'white',
-            borderRadius: 'medium',
-            overlayBlur: 'small',
+            accentColor: "#10b981",
+            accentColorForeground: "white",
+            borderRadius: "medium",
+            overlayBlur: "small",
           })}
         >
           <TooltipProvider>
@@ -29,9 +29,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
               position="bottom-right"
               toastOptions={{
                 style: {
-                  background: 'rgba(25, 31, 49, 0.9)',
-                  border: '1px solid rgba(78, 222, 163, 0.2)',
-                  color: '#dce1fb',
+                  background: "rgba(25, 31, 49, 0.9)",
+                  border: "1px solid rgba(78, 222, 163, 0.2)",
+                  color: "#dce1fb",
                 },
               }}
             />

@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono, Bebas_Neue } from "next/font/google";
+import {
+  Bebas_Neue,
+  Inter,
+  JetBrains_Mono,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -31,7 +36,15 @@ export const metadata: Metadata = {
   },
   description:
     "Anti-scalp ticketing, fan loyalty rewards, content monetization, and DAO governance for PSL fans on WireFluid.",
-  keywords: ["PSL", "cricket", "blockchain", "NFT tickets", "DAO", "WireFluid", "fan tokens"],
+  keywords: [
+    "PSL",
+    "cricket",
+    "blockchain",
+    "NFT tickets",
+    "DAO",
+    "WireFluid",
+    "fan tokens",
+  ],
   openGraph: {
     title: "CricketChain — Fan-Owned PSL Experience",
     description:

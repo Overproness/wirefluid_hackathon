@@ -1,31 +1,46 @@
-'use client';
+"use client";
 
-import { useCreateProposal } from '@/hooks/useGovernance';
-import { PROPOSAL_TYPES } from '@/lib/constants';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useState } from 'react';
-import { Plus, Trash2 } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { useCreateProposal } from "@/hooks/useGovernance";
+import { PROPOSAL_TYPES } from "@/lib/constants";
+import { Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
 
 interface CreateProposalModalProps {
   open: boolean;
   onClose: () => void;
 }
 
-export function CreateProposalModal({ open, onClose }: CreateProposalModalProps) {
+export function CreateProposalModal({
+  open,
+  onClose,
+}: CreateProposalModalProps) {
   const { createProposal, isPending, isSuccess } = useCreateProposal();
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [proposalType, setProposalType] = useState('0');
-  const [options, setOptions] = useState(['', '']);
-  const [duration, setDuration] = useState('86400'); // 1 day default
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [proposalType, setProposalType] = useState("0");
+  const [options, setOptions] = useState(["", ""]);
+  const [duration, setDuration] = useState("86400"); // 1 day default
 
-  const addOption = () => setOptions([...options, '']);
-  const removeOption = (i: number) => setOptions(options.filter((_, idx) => idx !== i));
+  const addOption = () => setOptions([...options, ""]);
+  const removeOption = (i: number) =>
+    setOptions(options.filter((_, idx) => idx !== i));
   const updateOption = (i: number, val: string) => {
     const updated = [...options];
     updated[i] = val;
@@ -36,7 +51,13 @@ export function CreateProposalModal({ open, onClose }: CreateProposalModalProps)
     e.preventDefault();
     const filtered = options.filter((o) => o.trim());
     if (!title || !description || filtered.length < 2) return;
-    createProposal(parseInt(proposalType), title, description, filtered, parseInt(duration));
+    createProposal(
+      parseInt(proposalType),
+      title,
+      description,
+      filtered,
+      parseInt(duration),
+    );
   };
 
   if (isSuccess) {
@@ -45,9 +66,18 @@ export function CreateProposalModal({ open, onClose }: CreateProposalModalProps)
         <DialogContent className="bg-[#0c1324] border-[rgba(134,148,138,0.08)] text-[#dce1fb]">
           <div className="text-center py-6">
             <p className="text-4xl mb-4">🗳️</p>
-            <h3 className="font-heading text-xl font-bold">Proposal Created!</h3>
-            <p className="text-sm text-[#bbcabf] mt-2">Community members can now vote on your proposal.</p>
-            <Button onClick={onClose} className="mt-4 primary-gradient text-white">Close</Button>
+            <h3 className="font-heading text-xl font-bold">
+              Proposal Created!
+            </h3>
+            <p className="text-sm text-[#bbcabf] mt-2">
+              Community members can now vote on your proposal.
+            </p>
+            <Button
+              onClick={onClose}
+              className="mt-4 primary-gradient text-white"
+            >
+              Close
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
@@ -58,19 +88,26 @@ export function CreateProposalModal({ open, onClose }: CreateProposalModalProps)
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="bg-[#0c1324] border-[rgba(134,148,138,0.08)] text-[#dce1fb] max-w-lg">
         <DialogHeader>
-          <DialogTitle className="font-heading text-xl">Create Proposal</DialogTitle>
+          <DialogTitle className="font-heading text-xl">
+            Create Proposal
+          </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Label className="text-sm text-[#bbcabf]">Proposal Type</Label>
-            <Select value={proposalType} onValueChange={(v) => v && setProposalType(v)}>
+            <Select
+              value={proposalType}
+              onValueChange={(v) => v && setProposalType(v)}
+            >
               <SelectTrigger className="bg-[#191f31] border-[rgba(134,148,138,0.15)] text-[#dce1fb] mt-1">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-[#191f31] border-[rgba(134,148,138,0.15)] text-[#dce1fb]">
                 {PROPOSAL_TYPES.map((type, i) => (
-                  <SelectItem key={i} value={String(i)}>{type}</SelectItem>
+                  <SelectItem key={i} value={String(i)}>
+                    {type}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -125,7 +162,11 @@ export function CreateProposalModal({ open, onClose }: CreateProposalModalProps)
                     className="bg-[#191f31] border-[rgba(134,148,138,0.15)] text-[#dce1fb]"
                   />
                   {options.length > 2 && (
-                    <button type="button" onClick={() => removeOption(i)} className="text-red-400 hover:text-red-300 p-2">
+                    <button
+                      type="button"
+                      onClick={() => removeOption(i)}
+                      className="text-red-400 hover:text-red-300 p-2"
+                    >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   )}
@@ -144,11 +185,20 @@ export function CreateProposalModal({ open, onClose }: CreateProposalModalProps)
           </div>
 
           <div className="flex gap-3 pt-2">
-            <Button type="button" variant="outline" onClick={onClose} className="flex-1 border-[rgba(134,148,138,0.15)] text-[#bbcabf]">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onClose}
+              className="flex-1 border-[rgba(134,148,138,0.15)] text-[#bbcabf]"
+            >
               Cancel
             </Button>
-            <Button type="submit" disabled={isPending} className="flex-1 primary-gradient text-white">
-              {isPending ? 'Creating…' : 'Create Proposal'}
+            <Button
+              type="submit"
+              disabled={isPending}
+              className="flex-1 primary-gradient text-white"
+            >
+              {isPending ? "Creating…" : "Create Proposal"}
             </Button>
           </div>
         </form>
