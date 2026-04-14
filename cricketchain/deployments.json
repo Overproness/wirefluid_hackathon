@@ -1,0 +1,166 @@
+{
+  "network": "wirefluidTestnet",
+  "chainId": 92533,
+  "deployer": "0xab6e336D8831b4929e4628C24280ba0165d5D7E0",
+  "deployedAt": "2026-04-14T18:35:28.595Z",
+  "contracts": {
+    "FanToken": "0x8Ec5cD1A9b0D98429E91F296B0c7acAd329545d3",
+    "FanIdentity": "0xc94d28025e2123A65f70594b379A79cBaA64AE93",
+    "TicketFactory": "0x5fb18Edd5340EAeB6AeaD2a66B8491B16F71b9dd",
+    "RevenueSplitter": "0xf2407E277497c0A78cbC544550b76172A1ff163d",
+    "ContentManager": "0xB3C42f652639272A6D8d297c8A2894182fC46bAC",
+    "PSLGovernor": "0x1b8b0eA5600354E3e643c52237a4e080aE732DA1"
+  },
+  "transactions": [
+    {
+      "step": "Deploy FanToken (ERC-20)",
+      "pillar": "CORE",
+      "hash": "0x3dcc9de76ceae1cace08d5dce27f4e7fc67fd93b7dd08800b90953c933ca55a8",
+      "description": "FanToken deployed at 0x8Ec5cD1A9b0D98429E91F296B0c7acAd329545d3"
+    },
+    {
+      "step": "Deploy FanIdentity (Profile+XP)",
+      "pillar": "CORE",
+      "hash": "0xac61d9d372bff58c98ca13e270199861ac6d9751adf9e90e5ca6ba1df457d1ba",
+      "description": "FanIdentity deployed at 0xc94d28025e2123A65f70594b379A79cBaA64AE93"
+    },
+    {
+      "step": "Deploy TicketFactory (ERC-1155)",
+      "pillar": "PILLAR1",
+      "hash": "0x8e749bfe2274669758ac97c173cdfa08f40c033e018634ae01bf77a41c68807d",
+      "description": "TicketFactory deployed at 0x5fb18Edd5340EAeB6AeaD2a66B8491B16F71b9dd"
+    },
+    {
+      "step": "Deploy RevenueSplitter",
+      "pillar": "PILLAR3",
+      "hash": "0x187a92720d8352ffc9e56d8b08a77c1524ed7a7824b6a917acde93b91f0efd01",
+      "description": "RevenueSplitter deployed at 0xf2407E277497c0A78cbC544550b76172A1ff163d"
+    },
+    {
+      "step": "Deploy ContentManager (ERC-721)",
+      "pillar": "PILLAR3",
+      "hash": "0xbc94073a039a06941744d38685390942638e023ef0272ec72fbb05a651198c3e",
+      "description": "ContentManager deployed at 0xB3C42f652639272A6D8d297c8A2894182fC46bAC"
+    },
+    {
+      "step": "Deploy PSLGovernor (DAO)",
+      "pillar": "PILLAR4",
+      "hash": "0x38d03458d48a560551f65fea776949259285918c9f2bba58f8236e2a77cffd2d",
+      "description": "PSLGovernor deployed at 0x1b8b0eA5600354E3e643c52237a4e080aE732DA1"
+    },
+    {
+      "step": "Grant MINTER_ROLE to FanIdentity",
+      "pillar": "CORE",
+      "hash": "0xab09a5e43ff27fc1c0b7522d0fe816f9d232d0c8af64abd155bcaa20d1f40643",
+      "description": "FanIdentity can now mint FanTokens when XP is awarded"
+    },
+    {
+      "step": "Grant XP_AWARDER to TicketFactory",
+      "pillar": "PILLAR1",
+      "hash": "0x5235303c8366a8fbe5f5bd08c06386a1cd6ec8a37a7c833070f95b8a9c95959a",
+      "description": "TicketFactory can award XP on check-in"
+    },
+    {
+      "step": "Grant XP_AWARDER to ContentManager",
+      "pillar": "PILLAR3",
+      "hash": "0xb6e70ca54dbdf16d7bd638de2fec9d937b7dd72f97868d596383c3f69de2efae",
+      "description": "ContentManager can award XP on content approval"
+    },
+    {
+      "step": "Grant XP_AWARDER to PSLGovernor",
+      "pillar": "PILLAR4",
+      "hash": "0xc74a4702cf14be4c2af71b04fb1333668005fdb56744b0ff40bf283450244edd",
+      "description": "PSLGovernor can award XP on vote"
+    },
+    {
+      "step": "Grant MANAGER_ROLE to ContentManager",
+      "pillar": "PILLAR3",
+      "hash": "0xaee70f8340025bf1d883b77d200d24888904e141c3dfe9723734bc34fe628c0e",
+      "description": "ContentManager can create revenue splits"
+    },
+    {
+      "step": "Register Fan Profile",
+      "pillar": "PILLAR2",
+      "hash": "0x819c72900c49843defa2515371129cb57e77b319031818cff8d3f9afa551832c",
+      "description": "Registered \"CricketChain_PSLFan\" — on-chain fan identity created"
+    },
+    {
+      "step": "Create PSL Match",
+      "pillar": "PILLAR1",
+      "hash": "0xb8ca5b5a5a72dab1b48feca3effc3d6b7393819bbfbe0a358424f82db02cad0f",
+      "description": "Created match: Lahore Qalandars vs Islamabad United - PSL Final"
+    },
+    {
+      "step": "Create Ticket Category: General",
+      "pillar": "PILLAR1",
+      "hash": "0x2081d1557eaf755a5190bf508788458bdd876b72a9121899384c2dd70808583a",
+      "description": "General Enclosure: 0.001 WIRE, max resale 110%, 50 tickets"
+    },
+    {
+      "step": "Create Ticket Category: VIP",
+      "pillar": "PILLAR1",
+      "hash": "0x46dfb90e880632d3e10c5dc83a097de9b9bc0f6c78cd163060559327658468b4",
+      "description": "VIP Box: 0.005 WIRE, max resale 110%, 10 tickets"
+    },
+    {
+      "step": "Buy General Ticket",
+      "pillar": "PILLAR1",
+      "hash": "0x4da2d22a065fd735c9fa0509ee3723fe42ab0c1cca56d67bc9c7b19f85094e04",
+      "description": "Fan purchased General ticket for 0.001 WIRE — ticket NFT (ERC-1155) transferred"
+    },
+    {
+      "step": "List Ticket for Resale (valid price)",
+      "pillar": "PILLAR1",
+      "hash": "0x0fab14a3cf56ac6be7728ea78ef9f6e7d0ce2dc09336d1a58c7c689fffa192c3",
+      "description": "Listed General ticket for resale at 0.0011 WIRE (110% cap enforced)"
+    },
+    {
+      "step": "Cancel Listing (get ticket back)",
+      "pillar": "PILLAR1",
+      "hash": "0x7c6452bd4f8a5c629939df4db02af66730fc6abebed79e736de24f2bde19fe9d",
+      "description": "Seller cancelled resale listing, ticket returned"
+    },
+    {
+      "step": "Check-In at Match",
+      "pillar": "PILLAR1+2",
+      "hash": "0x71147991ef416851dbafd37a341bf9fb943b7a02d136e1c2ae039454012ead8d",
+      "description": "Fan checked in at venue — +100 XP awarded, matchesAttended incremented (Pillar 1→2 integration)"
+    },
+    {
+      "step": "Submit Content",
+      "pillar": "PILLAR3",
+      "hash": "0x41a4e6e9958c6e357de536bf9d7a9e6b1e145738e848051257d0d0dc81238d0e",
+      "description": "Fan submitted cricket highlight content (IPFS metadata)"
+    },
+    {
+      "step": "Approve Content (mint NFT + split)",
+      "pillar": "PILLAR3+2",
+      "hash": "0x6ba515635d793568419b63e66ad601f526c3934738944b4af9fd1d5bf4d706cf",
+      "description": "Moderator approved content — ERC-721 NFT minted, revenue split created (50/20/15/15 BPS), +50 XP to creator"
+    },
+    {
+      "step": "Sponsor Content (revenue deposit)",
+      "pillar": "PILLAR3",
+      "hash": "0xb8a5119241a8d24bf4853476c8f440852445b7b82b930148505af6818fe8e3f4",
+      "description": "Brand sponsored content with 0.01 WIRE — funds deposited to RevenueSplitter for auto-distribution"
+    },
+    {
+      "step": "Claim Revenue (creator share)",
+      "pillar": "PILLAR3",
+      "hash": "0x01db0ad745e130b9775e7b18f1c81f426d1c77492f399376f597fc68f3f43561",
+      "description": "Creator claimed 0.005 WIRE — 50% revenue share from sponsored content"
+    },
+    {
+      "step": "Create DAO Proposal (MVP Vote)",
+      "pillar": "PILLAR4",
+      "hash": "0xe938b2190e7c1c55f1d9ad70b92c763a5f0e61d3930dc446e9cf22af58a6c137",
+      "description": "Created Man of the Match proposal with 3 options, 1-hour voting period"
+    },
+    {
+      "step": "Cast DAO Vote",
+      "pillar": "PILLAR4+2",
+      "hash": "0x00fd242f991962b488a0f0c3e3a45a1ed788b25c716de26a8b37023616d17a54",
+      "description": "Fan voted for Shaheen Afridi — vote weighted by FanToken balance × tier multiplier, +25 XP awarded (Pillar 4→2 integration)"
+    }
+  ]
+}
