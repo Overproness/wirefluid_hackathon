@@ -1,7 +1,7 @@
+import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { RevenueSplitter } from "../typechain-types";
-import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 
 describe("RevenueSplitter", function () {
   let revenueSplitter: RevenueSplitter;

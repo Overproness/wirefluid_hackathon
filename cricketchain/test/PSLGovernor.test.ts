@@ -1,8 +1,8 @@
+import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
+import { time } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { time } from "@nomicfoundation/hardhat-network-helpers";
-import { FanToken, FanIdentity, PSLGovernor } from "../typechain-types";
-import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
+import { FanIdentity, FanToken, PSLGovernor } from "../typechain-types";
 
 describe("PSLGovernor", function () {
   let fanToken: FanToken;

@@ -1,7 +1,7 @@
+import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { FanToken, FanIdentity } from "../typechain-types";
-import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
+import { FanIdentity, FanToken } from "../typechain-types";
 
 describe("FanIdentity", function () {
   let fanToken: FanToken;

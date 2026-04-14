@@ -8,20 +8,20 @@ A Web3 dApp frontend for the CricketChain smart contract ecosystem. Fans connect
 
 ## 1. Tech Stack
 
-| Layer | Technology | Reason |
-|---|---|---|
-| **Framework** | Next.js 14 (App Router) | SSR/SSG for SEO, file-based routing, server components |
-| **Language** | TypeScript (strict) | Type-safe contract interactions |
-| **Styling** | Tailwind CSS + shadcn/ui | Rapid, consistent UI components |
-| **Animations** | Framer Motion | Polished micro-interactions, page transitions |
-| **Web3 Layer** | wagmi v2 + viem v2 | Best-in-class React hooks for EVM contracts |
-| **Wallet UI** | RainbowKit v2 | Supports MetaMask, WalletConnect, Coinbase Wallet |
-| **Data Fetching** | TanStack Query v5 | Server state, caching, polling for chain updates |
-| **Charts** | Recharts | XP progression charts, revenue analytics |
-| **Icons** | Lucide React | Consistent icon set |
-| **Notifications** | Sonner | Toast notifications for tx confirmations |
-| **Form Validation** | React Hook Form + Zod | Safe form handling for content submission |
-| **Package Manager** | pnpm | Fast installs, monorepo-friendly |
+| Layer               | Technology               | Reason                                                 |
+| ------------------- | ------------------------ | ------------------------------------------------------ |
+| **Framework**       | Next.js 14 (App Router)  | SSR/SSG for SEO, file-based routing, server components |
+| **Language**        | TypeScript (strict)      | Type-safe contract interactions                        |
+| **Styling**         | Tailwind CSS + shadcn/ui | Rapid, consistent UI components                        |
+| **Animations**      | Framer Motion            | Polished micro-interactions, page transitions          |
+| **Web3 Layer**      | wagmi v2 + viem v2       | Best-in-class React hooks for EVM contracts            |
+| **Wallet UI**       | RainbowKit v2            | Supports MetaMask, WalletConnect, Coinbase Wallet      |
+| **Data Fetching**   | TanStack Query v5        | Server state, caching, polling for chain updates       |
+| **Charts**          | Recharts                 | XP progression charts, revenue analytics               |
+| **Icons**           | Lucide React             | Consistent icon set                                    |
+| **Notifications**   | Sonner                   | Toast notifications for tx confirmations               |
+| **Form Validation** | React Hook Form + Zod    | Safe form handling for content submission              |
+| **Package Manager** | pnpm                     | Fast installs, monorepo-friendly                       |
 
 ---
 
@@ -114,6 +114,7 @@ website/
 **Purpose:** First impression. Convert visitors to registered fans.
 
 **Sections:**
+
 1. **Hero** — Animated headline ("Own Your PSL Experience"), tagline, two CTAs ("Connect Wallet" / "Explore Matches"), animated cricket ball / stadium background
 2. **Stats Bar** — Live on-chain stats: Total Fans Registered, Matches Hosted, Content Pieces, Governance Proposals — pulled from contracts
 3. **Four Pillars** — Card grid, each pillar with icon, 1-line description, and link to its section
@@ -131,6 +132,7 @@ website/
 **Requires:** Wallet connected + fan registered. If unregistered, show registration prompt.
 
 **Sections:**
+
 1. **Profile Header** — Username, address (truncated), tier badge, XP progress bar to next tier, FAN token balance
 2. **XP Breakdown** — Visual chart: XP from match attendance vs content vs governance vs referrals
 3. **Stats Grid** — Matches Attended, Content Submitted, Votes Participated, Revenue Earned
@@ -146,12 +148,14 @@ website/
 **Purpose:** Browse upcoming matches, buy tickets, access resale marketplace.
 
 **Tabs:**
+
 - **Upcoming Matches** — Cards for each active match with ticket categories and availability
 - **Resale Marketplace** — Active listings with seller info, price, enforce-cap badge
 
 **Match Card Shows:** Match name, date/time, venue, ticket categories with prices and remaining supply, "Buy Ticket" button
 
 **Ticket Purchase Flow:**
+
 1. Click "Buy Ticket" → Modal opens
 2. Shows ticket category details, price in WIRE
 3. "Confirm Purchase" → wagmi sends `buyTicket(tokenId, { value: price })`
@@ -167,6 +171,7 @@ website/
 **Purpose:** Deep dive on one match — all ticket categories, real-time availability, resale listings for this match.
 
 **Sections:**
+
 - Match hero (name, date, teams)
 - Ticket categories in styled cards (price, supply progress bar, "X remaining")
 - Resale listings filtered to this match
@@ -179,6 +184,7 @@ website/
 **Purpose:** Fan-generated PSL content discovery and monetization hub.
 
 **Tabs:**
+
 - **Browse Approved** — Grid of approved content NFTs, sortable by tips received / newest
 - **My Submissions** — Fan's own content with status + revenue stats
 
@@ -193,6 +199,7 @@ website/
 **Purpose:** Form to submit content for moderation.
 
 **Form Fields:**
+
 - Title
 - Description
 - IPFS Metadata URI (with helper text: "Upload to IPFS first via Pinata/NFT.storage")
@@ -207,6 +214,7 @@ website/
 **Purpose:** Full view of one approved content piece with monetization actions.
 
 **Sections:**
+
 - Content embed (IPFS link / iframe)
 - Creator profile link, submission date, approval date
 - Revenue breakdown: Total Deposited, Creator Share (claimable), Platform Share, PSL Treasury Share
@@ -221,6 +229,7 @@ website/
 **Purpose:** PSL DAO voting hub.
 
 **Sections:**
+
 - **Active Proposals** — Cards with voting deadline countdown, top option leading, voter participation bar
 - **Past Proposals** — Finalized proposals with outcome and execution status
 - **Create Proposal** button (for wallets with PROPOSER_ROLE)
@@ -234,6 +243,7 @@ website/
 **Purpose:** Cast votes with full context.
 
 **Sections:**
+
 - Proposal title, type, description
 - Voting options with current vote tally (bar chart)
 - User's current voting power (FAN balance × tier multiplier)
@@ -249,6 +259,7 @@ website/
 **Purpose:** Public-facing fan profile — shareable.
 
 **Sections:**
+
 - Username, tier badge, join date
 - XP progression chart
 - Stats: Matches, Content, Votes, Revenue Earned
@@ -260,6 +271,7 @@ website/
 ## 4. Web3 Integration Architecture
 
 ### WireFluid Chain Config
+
 ```ts
 // lib/wagmi.ts
 const wirefluidTestnet = {
@@ -268,13 +280,15 @@ const wirefluidTestnet = {
   nativeCurrency: { name: "WIRE", symbol: "WIRE", decimals: 18 },
   rpcUrls: { default: { http: ["https://evm.wirefluid.com"] } },
   blockExplorers: {
-    default: { name: "WireScan", url: "https://wirefluidscan.com" }
+    default: { name: "WireScan", url: "https://wirefluidscan.com" },
   },
 };
 ```
 
 ### Contract Hooks Pattern
+
 Each hook uses `useReadContract` for reads and `useWriteContract` + `useWaitForTransactionReceipt` for writes:
+
 ```ts
 // hooks/useProfile.ts
 export function useProfile(address?: Address) {
@@ -289,7 +303,9 @@ export function useProfile(address?: Address) {
 ```
 
 ### Transaction UX Pattern
+
 Every write transaction follows this flow:
+
 1. User clicks action button
 2. Modal shows summary + estimated gas
 3. "Confirm" → wallet popup
@@ -303,32 +319,35 @@ Every write transaction follows this flow:
 
 ### Color Palette
 
-| Token | Value | Usage |
-|---|---|---|
-| `--emerald` | `#10B981` | Primary CTA, success states |
-| `--cricket-green` | `#166534` | Background accents |
-| `--gold` | `#F59E0B` | Gold tier, XP highlights |
-| `--platinum` | `#94A3B8` | Platinum tier badges |
-| `--diamond` | `#38BDF8` | Diamond tier, special elements |
-| `--slate-950` | `#020617` | Main background |
-| `--slate-900` | `#0F172A` | Card backgrounds |
-| `--slate-800` | `#1E293B` | Input backgrounds, borders |
+| Token             | Value     | Usage                          |
+| ----------------- | --------- | ------------------------------ |
+| `--emerald`       | `#10B981` | Primary CTA, success states    |
+| `--cricket-green` | `#166534` | Background accents             |
+| `--gold`          | `#F59E0B` | Gold tier, XP highlights       |
+| `--platinum`      | `#94A3B8` | Platinum tier badges           |
+| `--diamond`       | `#38BDF8` | Diamond tier, special elements |
+| `--slate-950`     | `#020617` | Main background                |
+| `--slate-900`     | `#0F172A` | Card backgrounds               |
+| `--slate-800`     | `#1E293B` | Input backgrounds, borders     |
 
 ### Tier Color Scheme
-| Tier | Color | Icon |
-|---|---|---|
-| Bronze | `#CD7F32` | Shield |
-| Silver | `#C0C0C0` | Shield+ |
-| Gold | `#FFD700` | Crown |
-| Platinum | `#E5E4E2` / blue shimmer | Star |
-| Diamond | `#B9F2FF` / cyan shimmer | Gem |
+
+| Tier     | Color                    | Icon    |
+| -------- | ------------------------ | ------- |
+| Bronze   | `#CD7F32`                | Shield  |
+| Silver   | `#C0C0C0`                | Shield+ |
+| Gold     | `#FFD700`                | Crown   |
+| Platinum | `#E5E4E2` / blue shimmer | Star    |
+| Diamond  | `#B9F2FF` / cyan shimmer | Gem     |
 
 ### Typography
+
 - **Display:** Bebas Neue or Barlow Condensed (cricket scoreboard feel)
 - **Body:** Inter or Geist Sans (clean, readable)
 - **Monospace:** JetBrains Mono (for addresses, hashes)
 
 ### Reusable Components (shadcn/ui base)
+
 - `<Button>` — 4 variants: default, outline, ghost, destructive
 - `<Card>` — Base card with header/content/footer slots
 - `<Badge>` — Tier badges, status badges, pillar tags
@@ -343,6 +362,7 @@ Every write transaction follows this flow:
 ## 6. Key User Flows
 
 ### New Fan Onboarding
+
 ```
 Visit landing page
   → "Connect Wallet" → RainbowKit modal (MetaMask / WalletConnect)
@@ -352,6 +372,7 @@ Visit landing page
 ```
 
 ### Buying a Ticket
+
 ```
 /tickets → pick match → pick category
   → "Buy Ticket" modal → shows price + max resale price info
@@ -361,6 +382,7 @@ Visit landing page
 ```
 
 ### Scalp Attempt (Anti-Scalp Demo)
+
 ```
 /dashboard → My Tickets → "List for Resale"
   → Price input: if over 110% → red warning inline: "Above maximum resale price"
@@ -369,6 +391,7 @@ Visit landing page
 ```
 
 ### Claim Revenue
+
 ```
 /content/[id] → "Claim Revenue" card
   → Shows: "0.005 WIRE claimable (50% of 0.01 WIRE deposited)"
@@ -377,6 +400,7 @@ Visit landing page
 ```
 
 ### Vote on Proposal
+
 ```
 /governance → open proposal → "Vote" button
   → Slide-in panel: shows options, your voting power, time left
@@ -401,11 +425,11 @@ Visit landing page
 
 ## 8. Deployment
 
-| Service | Use |
-|---|---|
-| **Vercel** | Frontend hosting (auto-deploy from GitHub main) |
+| Service                   | Use                                                      |
+| ------------------------- | -------------------------------------------------------- |
+| **Vercel**                | Frontend hosting (auto-deploy from GitHub main)          |
 | **Environment Variables** | `NEXT_PUBLIC_CHAIN_ID`, `NEXT_PUBLIC_*_CONTRACT_ADDRESS` |
-| **Domain** | Custom domain or Vercel subdomain for demo link |
+| **Domain**                | Custom domain or Vercel subdomain for demo link          |
 
 The contract addresses from `deployments.json` are hardcoded into `lib/contracts.ts` for the testnet deployment. No backend required — all reads go directly to the WireFluid RPC.
 

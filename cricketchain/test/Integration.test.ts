@@ -1,11 +1,15 @@
+import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
+import { time } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { time } from "@nomicfoundation/hardhat-network-helpers";
 import {
-  FanToken, FanIdentity, TicketFactory,
-  RevenueSplitter, ContentManager, PSLGovernor
+    ContentManager,
+    FanIdentity,
+    FanToken,
+    PSLGovernor,
+    RevenueSplitter,
+    TicketFactory
 } from "../typechain-types";
-import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 
 describe("Integration — Full CricketChain E2E", function () {
   let fanToken: FanToken;
