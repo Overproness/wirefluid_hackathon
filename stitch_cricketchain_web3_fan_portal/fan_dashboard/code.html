@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CricketChain | Fan Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Bebas+Neue&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#003824",
+                    "error": "#ffb4ab",
+                    "background": "#0c1324",
+                    "secondary": "#ffb95f",
+                    "on-secondary": "#472a00",
+                    "on-tertiary": "#00354a",
+                    "surface-variant": "#2e3447",
+                    "on-primary-container": "#00422b",
+                    "surface-tint": "#4edea3",
+                    "on-tertiary-container": "#003e55",
+                    "on-background": "#dce1fb",
+                    "surface": "#0c1324",
+                    "on-tertiary-fixed-variant": "#004c69",
+                    "on-primary-fixed-variant": "#005236",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-lowest": "#070d1f",
+                    "tertiary": "#7bd0ff",
+                    "outline-variant": "#3c4a42",
+                    "on-error": "#690005",
+                    "surface-container-high": "#23293c",
+                    "secondary-fixed-dim": "#ffb95f",
+                    "surface-bright": "#33394c",
+                    "error-container": "#93000a",
+                    "on-surface-variant": "#bbcabf",
+                    "on-secondary-container": "#5b3800",
+                    "on-primary-fixed": "#002113",
+                    "surface-dim": "#0c1324",
+                    "primary-container": "#10b981",
+                    "surface-container-highest": "#2e3447",
+                    "tertiary-fixed-dim": "#7bd0ff",
+                    "primary-fixed-dim": "#4edea3",
+                    "secondary-container": "#ee9800",
+                    "inverse-on-surface": "#2a3043",
+                    "primary-fixed": "#6ffbbe",
+                    "secondary-fixed": "#ffddb8",
+                    "primary": "#4edea3",
+                    "surface-container-low": "#151b2d",
+                    "on-surface": "#dce1fb",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "outline": "#86948a",
+                    "tertiary-fixed": "#c4e7ff",
+                    "inverse-primary": "#006c49",
+                    "tertiary-container": "#19aee8",
+                    "on-tertiary-fixed": "#001e2c",
+                    "on-secondary-fixed": "#2a1700",
+                    "surface-container": "#191f31",
+                    "inverse-surface": "#dce1fb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"],
+                    "mono": ["JetBrains Mono"],
+                    "display": ["Bebas Neue"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .shimmer-diamond {
+            background: linear-gradient(90deg, #b9f2ff 0%, #ffffff 50%, #b9f2ff 100%);
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+        .glass-card {
+            backdrop-filter: blur(32px);
+            background: rgba(21, 27, 45, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50 flex items-center justify-between px-6 py-4 max-w-full shadow-[0_8px_32px_0_rgba(56,189,248,0.08)]">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tighter text-emerald-500 font-headline">CricketChain</span>
+<div class="hidden md:flex items-center gap-6 font-headline tracking-tight">
+<a class="text-slate-400 hover:text-emerald-300 transition-colors" href="#">Home</a>
+<a class="text-emerald-400 border-b-2 border-emerald-500 pb-1" href="#">Dashboard</a>
+<a class="text-slate-400 hover:text-emerald-300 transition-colors" href="#">Tickets</a>
+<a class="text-slate-400 hover:text-emerald-300 transition-colors" href="#">Content</a>
+<a class="text-slate-400 hover:text-emerald-300 transition-colors" href="#">Governance</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary-container text-on-primary-container px-5 py-2 rounded-xl font-bold text-sm hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all active:scale-95">Connect Wallet</button>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer text-3xl">account_circle</span>
+</div>
+</nav>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-950 flex flex-col border-r border-slate-800/50 pt-20 hidden lg:flex">
+<div class="px-6 py-4">
+<div class="flex items-center gap-3 mb-8 p-3 rounded-xl bg-slate-900/50">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-tertiary to-primary p-0.5">
+<img alt="Fan Profile Avatar" class="w-full h-full rounded-full bg-slate-950" data-alt="geometric abstract jazzicon avatar with vibrant teal and purple patterns for a digital user profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLUw19tisPWiicDwQ9zS548gGuEwQ69d5Xe-s_lQaPNRWeZr8qW1iygKO2Yb4Ye-uM_W78_Vjqgvh9C5whmslgxWhA2iZcKfbOGkyfPCmUqdFwNTZ73v084huVhIbVpp4Ytx9fXrSdgjODZvgZokgzKsc2LjSrwT-S8iDhVsktfp5vEHOclYDQ8OOGNwXXuQvrrkkPUv-mdXVn3zytW-JADQ_C2vwW2xsOo_9A0XmS15ghsZrF_IfxUpUkuOzmtpJNvJ3COjqUwcmI"/>
+</div>
+<div>
+<p class="text-sm font-bold font-headline text-on-surface">Stadium Nocturne</p>
+<p class="text-[10px] uppercase tracking-widest text-emerald-500 font-mono">Diamond Tier Fan</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-2 font-headline font-medium">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-900/80 transition-all group" href="#">
+<span class="material-symbols-outlined">stadium</span>
+<span>Home</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/10 text-emerald-400 border-r-4 border-emerald-500 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-900/80 transition-all group" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span>Tickets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-900/80 transition-all group" href="#">
+<span class="material-symbols-outlined">play_circle</span>
+<span>Content</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-900/80 transition-all group" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span>Governance</span>
+</a>
+</nav>
+<div class="px-4 py-6 border-t border-slate-800/50 space-y-2">
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary-container font-bold py-3 rounded-xl mb-4 hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all">Mint Daily Pass</button>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:text-slate-300 transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-lg">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:text-slate-300 transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-lg">help</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 p-6 md:p-10 space-y-10 min-h-screen bg-surface">
+<!-- Hero Greeting & Proposal Alert -->
+<div class="space-y-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-4xl md:text-5xl font-display uppercase tracking-tight text-on-surface">Welcome back, CricketChain_PSLFan</h1>
+<p class="text-on-surface-variant font-headline mt-2">Your arena performance is peaking. Check your rewards below.</p>
+</div>
+</div>
+<!-- Active Proposal Alert (Amber) -->
+<div class="bg-secondary-container/10 border border-secondary/20 p-4 rounded-2xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="bg-secondary/20 p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</div>
+<div>
+<h3 class="font-bold text-secondary">Active Proposals</h3>
+<p class="text-xs text-secondary-fixed-dim">3 pending DAO votes found. Cast your vote to earn 50 XP per proposal.</p>
+</div>
+</div>
+<button class="bg-secondary text-on-secondary px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all">Vote Now</button>
+</div>
+</div>
+<!-- Profile & Stats Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Profile Card (Bento Style) -->
+<div class="lg:col-span-4 glass-card p-6 rounded-3xl relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="relative z-10">
+<div class="flex items-start justify-between mb-6">
+<img alt="User Avatar" class="w-20 h-20 rounded-2xl border-2 border-surface-container-highest" data-alt="abstract geometric avatar with neon green and dark navy blue color blocks in a modernist grid pattern" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd0_fyccJBMlw3ymd8Ze7oLweZkADPysWgCdC7Vu3VPO7pskmgs1o6TnsBwj90RxcPErxSXZ0YXChOaHjet5nOgy1OgD9P46KH9suJJF9bVPNOX4Q3ftC8Hjs3CbOgEm2AOGUQENkOzZZMH1-eTtyZORkPjJF0RZMVRKWPRr1wr0lSnajWircBV8iEkxIZc1pUsRreMHlOqG-drJGPZNGAM14m2bwCbN81ijEALG__tqJK28YWoUnk0O7CgaMi8mIKtcM8edzXNXWS"/>
+<div class="shimmer-diamond px-3 py-1 rounded-full text-slate-900 text-[10px] font-black uppercase tracking-widest shadow-lg">Diamond Tier</div>
+</div>
+<h2 class="text-2xl font-headline font-bold mb-1">CricketChain_PSLFan</h2>
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-tertiary text-sm">account_balance_wallet</span>
+<span class="font-mono text-xs text-on-surface-variant">0x8a...4bE2</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-headline font-bold">
+<span>175 / 500 XP to Silver</span>
+<span class="text-emerald-500">35%</span>
+</div>
+<div class="h-3 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-emerald-500 to-primary-container w-[35%] rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-low p-5 rounded-3xl border border-outline-variant/10 group hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-tertiary mb-3">stadium</span>
+<p class="text-[10px] uppercase font-mono text-on-surface-variant mb-1">Matches Attended</p>
+<p class="text-2xl font-display">14</p>
+</div>
+<div class="bg-surface-container-low p-5 rounded-3xl border border-outline-variant/10 group hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-primary mb-3">upload_file</span>
+<p class="text-[10px] uppercase font-mono text-on-surface-variant mb-1">Content Submitted</p>
+<p class="text-2xl font-display">8</p>
+</div>
+<div class="bg-surface-container-low p-5 rounded-3xl border border-outline-variant/10 group hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-secondary mb-3">how_to_vote</span>
+<p class="text-[10px] uppercase font-mono text-on-surface-variant mb-1">Votes Cast</p>
+<p class="text-2xl font-display">22</p>
+</div>
+<div class="bg-surface-container-low p-5 rounded-3xl border border-outline-variant/10 group hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-emerald-400 mb-3">payments</span>
+<p class="text-[10px] uppercase font-mono text-on-surface-variant mb-1">Revenue Earned</p>
+<p class="text-xl font-mono">0.45 <span class="text-xs text-on-surface-variant">WIRE</span></p>
+</div>
+</div>
+</div>
+<!-- Content Middle Row: XP Breakdown & My Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- XP Breakdown Donut Chart Mimic -->
+<div class="lg:col-span-4 bg-surface-container-low p-8 rounded-3xl">
+<h3 class="font-headline font-bold text-lg mb-8">XP Composition</h3>
+<div class="relative w-48 h-48 mx-auto mb-8">
+<!-- Custom SVG Donut -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<circle class="stroke-surface-container-highest" cx="18" cy="18" fill="none" r="15.9" stroke-width="3.5"></circle>
+<circle class="stroke-primary" cx="18" cy="18" fill="none" r="15.9" stroke-dasharray="45, 100" stroke-linecap="round" stroke-width="3.5"></circle>
+<circle class="stroke-tertiary" cx="18" cy="18" fill="none" r="15.9" stroke-dasharray="25, 100" stroke-dashoffset="-45" stroke-linecap="round" stroke-width="3.5"></circle>
+<circle class="stroke-secondary" cx="18" cy="18" fill="none" r="15.9" stroke-dasharray="30, 100" stroke-dashoffset="-70" stroke-linecap="round" stroke-width="3.5"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-display">175</span>
+<span class="text-[10px] text-on-surface-variant font-mono">TOTAL XP</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="text-on-surface-variant">Attendance</span></div>
+<span class="font-mono">45%</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-tertiary"></div><span class="text-on-surface-variant">Governance</span></div>
+<span class="font-mono">25%</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-secondary"></div><span class="text-on-surface-variant">Content</span></div>
+<span class="font-mono">30%</span>
+</div>
+</div>
+</div>
+<!-- My Content List -->
+<div class="lg:col-span-8">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline font-bold text-lg">Recent Submissions</h3>
+<button class="text-xs font-bold text-emerald-500 flex items-center gap-1 hover:underline">View All <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-4 rounded-2xl flex items-center gap-4 hover:bg-surface-container-high transition-all">
+<div class="w-16 h-16 rounded-xl bg-slate-900 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover opacity-60" data-alt="a blurred cinematic close-up of a high-action cricket match being filmed on a smartphone by a cheering fan in a crowded stadium" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2_La3os-NJVLVLh0tyMWsjYHnjll8WodjxvNwtv046z7iksHjHslqkus9KUSa1yw5A9KK8l1gDzCKb_Y4Kz2tJocC-Fir5XbmuBZZjad8XTQFdArZT5QhhD2nFQ2arCNxjfcb0SJJrdH2r0UK8jv3-mkLhf4k3S30fOEQaYbfT2fFgnvRSx0VYjEZdRUXI22-oKhZkuXKGBtKqPrw0rv4bq8ZyUVsQRwHv2lAa9DI7zt0b411ndK_m6P12rxziY1iPcMiifrtv-xi"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-sm">Final Over Celebration: Raw Footage</h4>
+<p class="text-xs text-on-surface-variant">Stadium atmosphere capture (Qalandars vs Kings)</p>
+</div>
+<div class="text-right">
+<div class="px-2 py-1 rounded-md bg-emerald-500/10 text-emerald-500 text-[10px] font-bold uppercase mb-1">Approved</div>
+<p class="text-sm font-mono">+0.12 WIRE</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl flex items-center gap-4 hover:bg-surface-container-high transition-all">
+<div class="w-16 h-16 rounded-xl bg-slate-900 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover opacity-60" data-alt="colorful bokeh lights of a night-time cricket stadium with abstract shapes and deep blue shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfVffA0mhFndbMlEfhshCR0-a9kyyIfq7KtdRj-m9oFJz3YLVnuHOnjVOlmAncHEmY03QxtowuBUf081XRjkgD4wQSmLTInMSHHLj18rOzW9wkMT2_n4jacocZFgErXf0XFWumnuNOtfxYNaLYM1r0ydWbWfEneyOrsFVUvJB9A0sIVQluxFsdBmy2wTkBGBdTf21Ck7omDP3eonUHPat0GCEz5-poDl-ZJMyh1HU2c0Z9lXAQORRyfgQ2i4vRtPCl4qrXxqUC8ES_"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-sm">Pitch Report: Fan Perspective</h4>
+<p class="text-xs text-on-surface-variant">User-generated analysis article</p>
+</div>
+<div class="text-right">
+<div class="px-2 py-1 rounded-md bg-secondary-container/10 text-secondary text-[10px] font-bold uppercase mb-1">Pending</div>
+<p class="text-sm font-mono">0.00 WIRE</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl flex items-center gap-4 hover:bg-surface-container-high transition-all">
+<div class="w-16 h-16 rounded-xl bg-slate-900 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover opacity-60" data-alt="a fast-paced action shot of a cricket ball hitting the stumps with flying bails under stadium floodlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmfC9-QMe2HSJvShz_RDXcfdpcg58n1sYWxQS7r7KiE0ZN-OL2ajOW-bXZ50H-ss73HNJjNz-mOO6PikucA1Nxo9jMeqNr-Rf5ZWP-FSxjgpO01gW_Q5d9EU9hglgnlRqvNS9NnKo9d-DV_QHkYNN4_m9SUa6gN8XXrfxefQiw0h5tpN3Mdz5BqMekobTG1e1iEZ34PfHMD06b4Xvpsbm-e5S8y5FULsqrSq4wCbRQUjHXMxJ6cbMDkKEDnv2ptVUmmNVJK087cNed"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-sm">Match Highlights: Wicket Reel</h4>
+<p class="text-xs text-on-surface-variant">Edited montage submission</p>
+</div>
+<div class="text-right">
+<div class="px-2 py-1 rounded-md bg-emerald-500/10 text-emerald-500 text-[10px] font-bold uppercase mb-1">Approved</div>
+<p class="text-sm font-mono">+0.25 WIRE</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- My Tickets Section (Horizontal Scroll) -->
+<section>
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-3xl font-display uppercase tracking-tight">Active Match Tickets</h2>
+<div class="flex gap-2">
+<button class="p-2 rounded-full bg-surface-container-high text-on-surface hover:bg-primary/20 transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-2 rounded-full bg-surface-container-high text-on-surface hover:bg-primary/20 transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-6 overflow-x-auto pb-6 no-scrollbar">
+<!-- Ticket 1: Lahore vs Karachi -->
+<div class="min-w-[320px] bg-gradient-to-br from-green-900/40 to-slate-900 rounded-3xl border border-outline-variant/10 p-6 flex flex-col justify-between h-[220px] relative group overflow-hidden">
+<div class="absolute -right-10 -bottom-10 opacity-10 group-hover:opacity-20 transition-all">
+<span class="material-symbols-outlined text-[150px]">stadium</span>
+</div>
+<div class="relative z-10 flex justify-between items-start">
+<div>
+<p class="text-[10px] font-mono text-primary mb-1 uppercase tracking-widest">Lahore Qalandars vs Karachi Kings</p>
+<h3 class="text-2xl font-headline font-bold">Gaddafi Stadium</h3>
+</div>
+<div class="bg-primary/20 p-2 rounded-xl text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">qr_code_2</span>
+</div>
+</div>
+<div class="relative z-10">
+<p class="text-xs text-on-surface-variant font-headline">Oct 24, 2024 • 19:30 PKT</p>
+<div class="mt-4 flex items-center justify-between">
+<span class="text-xs bg-slate-950/50 px-3 py-1 rounded-full text-slate-300">Section 4A • Row 12</span>
+<button class="bg-primary text-on-primary font-bold px-4 py-2 rounded-xl text-xs hover:scale-105 transition-all">Check-in</button>
+</div>
+</div>
+</div>
+<!-- Ticket 2: Islamabad vs Peshawar -->
+<div class="min-w-[320px] bg-gradient-to-br from-red-900/40 to-slate-900 rounded-3xl border border-outline-variant/10 p-6 flex flex-col justify-between h-[220px] relative group overflow-hidden">
+<div class="absolute -right-10 -bottom-10 opacity-10 group-hover:opacity-20 transition-all">
+<span class="material-symbols-outlined text-[150px]">stadium</span>
+</div>
+<div class="relative z-10 flex justify-between items-start">
+<div>
+<p class="text-[10px] font-mono text-error mb-1 uppercase tracking-widest">Islamabad United vs Peshawar Zalmi</p>
+<h3 class="text-2xl font-headline font-bold">Pindi Stadium</h3>
+</div>
+<div class="bg-error/20 p-2 rounded-xl text-error">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">qr_code_2</span>
+</div>
+</div>
+<div class="relative z-10">
+<p class="text-xs text-on-surface-variant font-headline">Oct 28, 2024 • 14:00 PKT</p>
+<div class="mt-4 flex items-center justify-between">
+<span class="text-xs bg-slate-950/50 px-3 py-1 rounded-full text-slate-300">Premium Encl. • Row 03</span>
+<button class="bg-slate-800 text-slate-400 font-bold px-4 py-2 rounded-xl text-xs cursor-not-allowed">Opens Oct 27</button>
+</div>
+</div>
+</div>
+<!-- Ticket 3: Multan vs Quetta -->
+<div class="min-w-[320px] bg-gradient-to-br from-blue-900/40 to-slate-900 rounded-3xl border border-outline-variant/10 p-6 flex flex-col justify-between h-[220px] relative group overflow-hidden">
+<div class="absolute -right-10 -bottom-10 opacity-10 group-hover:opacity-20 transition-all">
+<span class="material-symbols-outlined text-[150px]">stadium</span>
+</div>
+<div class="relative z-10 flex justify-between items-start">
+<div>
+<p class="text-[10px] font-mono text-tertiary mb-1 uppercase tracking-widest">Multan Sultans vs Quetta Gladiators</p>
+<h3 class="text-2xl font-headline font-bold">Multan Stadium</h3>
+</div>
+<div class="bg-tertiary/20 p-2 rounded-xl text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">qr_code_2</span>
+</div>
+</div>
+<div class="relative z-10">
+<p class="text-xs text-on-surface-variant font-headline">Nov 02, 2024 • 20:00 PKT</p>
+<div class="mt-4 flex items-center justify-between">
+<span class="text-xs bg-slate-950/50 px-3 py-1 rounded-full text-slate-300">General Stand • Row 22</span>
+<button class="bg-slate-800 text-slate-400 font-bold px-4 py-2 rounded-xl text-xs cursor-not-allowed">Opens Nov 01</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-slate-950 w-full py-12 border-t border-slate-800/20">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-left">
+<p class="font-mono text-xs uppercase tracking-widest text-slate-600">© 2024 CricketChain Arena. Verified Contract: 0xStadium...Nocturne</p>
+</div>
+<div class="flex gap-8 font-mono text-xs uppercase tracking-widest text-slate-600">
+<a class="hover:text-emerald-400 transition-all opacity-80 hover:opacity-100" href="#">Whitepaper</a>
+<a class="hover:text-emerald-400 transition-all opacity-80 hover:opacity-100" href="#">Security Audit</a>
+<a class="hover:text-emerald-400 transition-all opacity-80 hover:opacity-100" href="#">DAO Governance</a>
+<a class="hover:text-emerald-400 transition-all opacity-80 hover:opacity-100" href="#">Twitter</a>
+<a class="hover:text-emerald-400 transition-all opacity-80 hover:opacity-100" href="#">Discord</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-950/90 backdrop-blur-xl flex items-center justify-around py-3 z-50 border-t border-slate-800/50">
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">stadium</span>
+<span class="text-[10px]">Home</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-emerald-400">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px]">Dashboard</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="text-[10px]">Tickets</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">play_circle</span>
+<span class="text-[10px]">Content</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-[10px]">DAO</span>
+</div>
+</div>
+</body></html>
