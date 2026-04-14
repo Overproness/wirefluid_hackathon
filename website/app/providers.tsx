@@ -1,21 +1,19 @@
 "use client";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "sonner";
 import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
+import { Toaster } from "sonner";
 
 const WalletProviders = dynamic(
   () => import("./wallet-providers").then((m) => m.WalletProviders),
-  { ssr: false }
+  { ssr: false },
 );
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <TooltipProvider>
-      <WalletProviders>
-        {children}
-      </WalletProviders>
+      <WalletProviders>{children}</WalletProviders>
       <Toaster
         theme="dark"
         position="bottom-right"

@@ -2,11 +2,11 @@
 
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 import {
-  coinbaseWallet,
-  metaMaskWallet,
-  okxWallet,
-  rainbowWallet,
-  walletConnectWallet,
+    coinbaseWallet,
+    metaMaskWallet,
+    okxWallet,
+    rainbowWallet,
+    walletConnectWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import { defineChain } from 'viem';
 
