@@ -104,7 +104,7 @@ export function Footer() {
 
         <div className="mt-8 pt-6 border-t border-[rgba(134,148,138,0.1)] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-[#bbcabf] font-mono uppercase tracking-widest">
-            © 2024 CricketChain Arena. Verified Contract: 0xStadium...Nocturne
+            © 2026 CricketChain Arena. Verified Contract: 0xStadium...Nocturne
           </p>
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-[#4edea3]" />
