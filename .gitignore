@@ -1,0 +1,5 @@
+designs/
+documentation/
+plans/
+.env.local
+.env
